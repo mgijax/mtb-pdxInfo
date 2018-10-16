@@ -42,6 +42,7 @@ public class PDXInfoUtil {
 
     private static String mtbUser;
     private static String mtbPassword;
+    private static String mtbDB;
 
     private static String baseURI = "http://pdxdata.jax.org/api/";
 
@@ -63,6 +64,7 @@ public class PDXInfoUtil {
             password = p.getProperty("elimspassword");
             mtbUser = p.getProperty("mtbuser");
             mtbPassword = p.getProperty("mtbpassword");
+            mtbDB = p.getProperty("mtbDB");
         }catch(Exception e){
             log.error("can't load properties file",e);
         }
@@ -336,7 +338,7 @@ public class PDXInfoUtil {
 
             HashMap<String, ArrayList<String>> detailsMap = getPDXClinicalDetails();
 
-            HashMap<String, ArrayList<ArrayList<String>>> socMap = SOCLoader.getRECISTMap();
+            HashMap<String, ArrayList<ArrayList<String>>> socMap = SOCLoader.getRECISTMap(socPath);
 
             MTB_wsStub stub = getStub();
 
@@ -432,9 +434,10 @@ public class PDXInfoUtil {
         return in;
     }
 
-    // if engraftment site is not provided it is Sub Q 
+    // if engraftment site is not provided it is ''
     private String fixEngraftment(String in) {
         if (in == null || in.trim().length() == 0) {
+            // formerly sub q but not anymore
             return "";
         } else {
             return in;
@@ -443,7 +446,7 @@ public class PDXInfoUtil {
 
     private PDXDAO getPDXDAO() {
         PDXDAO pdxDAO = PDXDAO.getInstance();
-        pdxDAO.setConnectionInfo("org.postgresql.Driver", "jdbc:postgresql://bhmtbprd01:5432/mtb", mtbPassword, mtbUser);
+        pdxDAO.setConnectionInfo("org.postgresql.Driver", mtbDB, mtbPassword, mtbUser);
         return pdxDAO;
     }
 

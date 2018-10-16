@@ -25,17 +25,15 @@ public class SOCLoader {
       private static final Logger log
             = Logger.getLogger(SOCLoader.class.getName());
 
-      private static String path = "/usr/local/mgi/mtb/soc/soc_data/soc_data.db";
-   //   private static String path = "C:/soc_data.db";
-   
+     
       
       /**
        * For all models with RECIST data return a mapping modelId -> list of pairs of drug, response
        * @ return HashMap<String,ArrayList<ArrayList<String>>>
       */
-       public static HashMap<String,ArrayList<ArrayList<String>>> getRECISTMap() {
+       public static HashMap<String,ArrayList<ArrayList<String>>> getRECISTMap(String path) {
 
-       
+        
         HashMap<String,ArrayList<ArrayList<String>>> modelsMap = new HashMap();
         try {
             
