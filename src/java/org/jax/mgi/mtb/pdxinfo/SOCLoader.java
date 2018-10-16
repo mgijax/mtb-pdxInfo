@@ -25,8 +25,8 @@ public class SOCLoader {
       private static final Logger log
             = Logger.getLogger(SOCLoader.class.getName());
 
-   //   private static String path = "/usr/local/mgi/mtb/soc/soc_data/soc_data.db";
-      private static String path = "C:/soc_data.db";
+      private static String path = "/usr/local/mgi/mtb/soc/soc_data/soc_data.db";
+   //   private static String path = "C:/soc_data.db";
    
       
       /**
