@@ -22,6 +22,8 @@ import org.apache.log4j.Logger;
  */
 public class SOCLoader {
     
+   
+    
       private static final Logger log
             = Logger.getLogger(SOCLoader.class.getName());
 
@@ -101,6 +103,7 @@ public class SOCLoader {
                     ArrayList<ArrayList<String>> list = new ArrayList();
                     list.add(data);
                     modelsMap.put(id,list);
+                   
                 }
                
                

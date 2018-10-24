@@ -10,8 +10,6 @@ import com.starlims.www.webservices.MTB_wsStub;
 import com.starlims.www.webservices.PDXPatientClinicalReport;
 import com.starlims.www.webservices.Pdx_model_status;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,6 +23,7 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 //import org.apache.axiom.soap.SOAP11Constants;
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXComment;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
@@ -37,16 +36,18 @@ import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
  */
 public class PDXInfoUtil {
 
-    private static String userName;
-    private static String password;
-
-    private static String mtbUser;
-    private static String mtbPassword;
-    private static String mtbDB;
+    private String userName;
+    private String password;
+    private String mtbUser;
+    private String mtbPassword;
+    private String mtbDB;
+    private String socURL;
 
     private static String baseURI = "http://pdxdata.jax.org/api/";
 
     private static String VARIANTS = baseURI + "variants";
+    private static String CNV = baseURI+"/cnv_gene?keepnulls=yes&all_ctp_genes=yes&model=";
+    private static String EXP = baseURI+"/expression?keepnulls=yes&all_ctp_genes=yes&model=";
 
     private static String JSON_PDX_INFO;
 
@@ -54,6 +55,12 @@ public class PDXInfoUtil {
 
     private final static Logger log
             = Logger.getLogger(PDXInfoUtil.class.getName());
+    
+    public static void main(String[] args){
+        PDXInfoUtil util = new PDXInfoUtil();
+        System.out.println(util.getJSONPDXInfo());
+        System.out.println(util.getModelHistology("TM00089"));
+    }
 
     public PDXInfoUtil() {
         try{
@@ -64,7 +71,9 @@ public class PDXInfoUtil {
             password = p.getProperty("elimspassword");
             mtbUser = p.getProperty("mtbuser");
             mtbPassword = p.getProperty("mtbpassword");
-            mtbDB = p.getProperty("mtbDB");
+            mtbDB = p.getProperty("mtbdb");
+            socURL = p.getProperty("socurl");
+            
         }catch(Exception e){
             log.error("can't load properties file",e);
         }
@@ -101,19 +110,101 @@ public class PDXInfoUtil {
     }
 
     public String getModelCNV(String modelID) {
-        PDXDAO pdxDao = getPDXDAO();
-        String cnvData = pdxDao.getModelCNVJSON(modelID);
+       // PDXDAO pdxDao = getPDXDAO();
+       // these should just be CTP genes
+       // need to check with PDXFinder about new format for log ratio ploidy
+        String cnvData = getModelCNVJSON(modelID);
 
         return cnvData;
     }
 
     public String getModelExpression(String modelID) {
-        PDXDAO pdxDao = getPDXDAO();
-        String expressionData = pdxDao.getModelExpressionJSON(modelID);
+      //  PDXDAO pdxDao = getPDXDAO();
+       // these should just be CTP genes
+        String expressionData = getModelExpressionJSON(modelID);
 
         return expressionData;
     }
+    
+    private String getModelCNVJSON(String modelID) {
 
+       
+        StringBuffer result = new StringBuffer("{\"data\":[");
+        StringBuffer query = new StringBuffer(CNV).append(modelID);
+        try{
+            
+            JSONObject job = new JSONObject(getJSON(CNV+modelID));
+            JSONArray array = (JSONArray) job.get("data");
+            if(array.length()==0){
+                result.append(",");
+            }
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+
+                result.append("{\"model\":\"").append(data.getString("model_name")).append("\",");
+                 result.append("\"sample\":\"").append(data.getString("sample_name")).append("\",");
+                result.append("\"passage\":\"").append(data.getString("passage_num")).append("\",");
+                result.append("\"gene\":\"").append(data.getString("gene_symbol")).append("\",");
+                result.append("\"logratio_ploidy\":\"").append(data.getDouble("logratio_ploidy")).append("\",");
+                result.append("\"platform\":\"").append(data.getString("platform")).append("\"},");
+
+            }
+            result.replace(result.length()-1, result.length(), "]}");
+
+        } catch (JSONException e) {
+            log.error(e);
+        }
+
+        return result.toString();
+
+    }
+     
+     
+     
+      public String getModelExpressionJSON(String modelID) {
+
+       
+        StringBuffer result = new StringBuffer("{\"data\":[");
+        try{
+            
+            JSONObject job = new JSONObject(getJSON(EXP+modelID));
+            JSONArray array = (JSONArray) job.get("data");
+            if(array.length()==0){
+                result.append(",");
+            }
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject data = array.getJSONObject(i);
+
+                result.append("{\"model\":\"").append(data.getString("model_name")).append("\",");
+                result.append("\"sample\":\"").append(data.getString("sample_name")).append("\",");
+                result.append("\"passage\":\"").append(data.getString("passage_num")).append("\",");
+                result.append("\"gene\":\"").append(data.getString("gene_symbol")).append("\",");
+                try{
+                    data.getDouble("z_score_percentile_rank");
+                    result.append("\"z_score_percentile_rank\":\"").append(data.getDouble("z_score_percentile_rank")).append("\",");
+                }catch(Exception e){
+                    // means model is from DFCI or Baylor won't have a value
+                    result.append("\"TPM\":\"").append(data.getDouble("tpm")).append("\",");
+                }
+                result.append("\"platform\":\"").append(data.getString("platform")).append("\"},");
+
+            }
+            result.replace(result.length()-1, result.length(), "]}");
+
+        
+        
+            
+           
+        } catch (Exception e) {
+            log.error(e);
+        
+        }
+
+        return result.toString();
+
+    }
+     
+    
     // keep a cached copy of the PDXInfo JSON but use a new one if available
     // used by the EBI PDXInfo project for loading JAX PDX data
     public String getJSONPDXInfo() {
@@ -250,6 +341,9 @@ public class PDXInfoUtil {
         return val;
     }
 
+    private String getJSON(String uri){
+        return getJSON(uri,null);
+    }
     private String getJSON(String uri, String json) {
 
         boolean post = true;
@@ -338,7 +432,7 @@ public class PDXInfoUtil {
 
             HashMap<String, ArrayList<String>> detailsMap = getPDXClinicalDetails();
 
-            HashMap<String, ArrayList<ArrayList<String>>> socMap = SOCLoader.getRECISTMap(socPath);
+            HashMap<String, ArrayList<ArrayList<String>>> socMap = SOCLoader.getRECISTMap(socURL);
 
             MTB_wsStub stub = getStub();
 
