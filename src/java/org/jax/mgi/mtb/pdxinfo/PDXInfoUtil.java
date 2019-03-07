@@ -260,7 +260,7 @@ public class PDXInfoUtil {
                         result.append("\"allele frequency\":\"").append(getField(array.getJSONObject(i), "allele_frequency")).append("\",");
 
                         result.append("\"passage num\":\"").append(getField(array.getJSONObject(i), "passage_num")).append("\",");
-                        result.append("\"gene id\":\"").append(getField(array.getJSONObject(i), "gene_id")).append("\"");// will need a comma if not last field
+                        result.append("\"gene id\":\"").append(getField(array.getJSONObject(i), "entrez_gene_id")).append("\"");// will need a comma if not last field
 
                         result.append("},");
                     }
