@@ -249,6 +249,7 @@ public class PDXInfoUtil {
                         result.append("\"sample\":\"").append(getField(array.getJSONObject(i), "sample_name")).append("\",");
                         result.append("\"gene symbol\":\"").append(getField(array.getJSONObject(i), "gene_symbol")).append("\",");
                         result.append("\"platform\":\"").append(getField(array.getJSONObject(i), "platform")).append("\",");
+                        result.append("\"genome assembly\":\"GRCh38\",");
                         result.append("\"chromosome\":\"").append(getField(array.getJSONObject(i), "chromosome")).append("\",");
                         result.append("\"seq position\":\"").append(getField(array.getJSONObject(i), "seq_position")).append("\",");
                         result.append("\"ref allele\":\"").append(getField(array.getJSONObject(i), "ref_allele")).append("\",");
