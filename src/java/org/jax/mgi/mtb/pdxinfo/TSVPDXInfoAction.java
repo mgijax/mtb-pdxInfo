@@ -17,10 +17,12 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author sbn
  */
-public class PDXInfoAction extends Action {
+public class TSVPDXInfoAction extends Action {
 
     private final static Logger log
-            = Logger.getLogger(PDXInfoAction.class.getName());
+            = Logger.getLogger(TSVPDXInfoAction.class.getName());
+    
+    private final static TSVPDXInfoUtil util = new TSVPDXInfoUtil();
 
     public ActionForward execute(ActionMapping mapping,
             ActionForm form,
@@ -28,35 +30,37 @@ public class PDXInfoAction extends Action {
             HttpServletResponse response)
             throws Exception {
 
-        PDXInfoUtil pdxInfoUtil = new PDXInfoUtil();
-     
-        response.setContentType("application/json");
+        TSVPDXInfoUtil util = new TSVPDXInfoUtil();
+        
+        response.setContentType("text/plain");
 
-        if (request.getParameter("allModels") != null) {
-            response.getWriter().write(pdxInfoUtil.getJSONPDXInfo());
-        }
-
+        
         String modelID = request.getParameter("modelVariation");
         if (modelID != null) {
-            response.getWriter().write(pdxInfoUtil.getVariationJSON(modelID));
+            response.getWriter().write(util.getVariationTSV(modelID));
         }
         
-       
-
-        modelID = request.getParameter("modelHistology");
-        if (modelID != null) {
-            response.getWriter().write(pdxInfoUtil.getModelHistology(modelID));
+        else if(request.getParameter("patients")!=null){
+            response.getWriter().write(util.getPatients());
         }
         
-        modelID = request.getParameter("modelCNV");
-        if (modelID != null) {
-            response.getWriter().write(pdxInfoUtil.getModelCNV(modelID));
+        else if(request.getParameter("samples")!=null){
+            response.getWriter().write(util.getSamples());
         }
         
-        modelID = request.getParameter("modelExpression");
-        if (modelID != null) {
-            response.getWriter().write(pdxInfoUtil.getModelExpression(modelID));
+        else if(request.getParameter("models")!=null){
+            response.getWriter().write(util.getModels());
         }
+        
+        else if(request.getParameter("validation")!=null){
+            response.getWriter().write(util.getValidations());
+        }
+        
+        else if(request.getParameter("sharing")!=null){
+            response.getWriter().write(util.getSharing());
+        }
+        
+      
 
         response.flushBuffer();
 

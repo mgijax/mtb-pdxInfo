@@ -46,20 +46,21 @@ public class PDXInfoUtil {
     private static String baseURI = "http://pdxdata.jax.org/api/";
 
     private static String VARIANTS = baseURI + "variants";
-    private static String CNV = baseURI+"/cnv_gene?keepnulls=yes&all_ctp_genes=yes&model=";
-    private static String EXP = baseURI+"/expression?keepnulls=yes&all_ctp_genes=yes&model=";
+    private static String CNV = baseURI+"/cnv_gene?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
+    private static String EXP = baseURI+"/expression?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
 
     private static String JSON_PDX_INFO;
 
     private static final String graphicURL = "http://tumor.informatics.jax.org/mtbwi/pdxDetailsTabs.do?tab=graphicDetails&contentKey=";
 
+    private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ";
+    
     private final static Logger log
             = Logger.getLogger(PDXInfoUtil.class.getName());
     
     public static void main(String[] args){
         PDXInfoUtil util = new PDXInfoUtil();
-        System.out.println(util.getJSONPDXInfo());
-        System.out.println(util.getModelHistology("TM00089"));
+        util.getPDXInfo();
     }
 
     public PDXInfoUtil() {
@@ -78,6 +79,8 @@ public class PDXInfoUtil {
             log.error("can't load properties file",e);
         }
     }
+    
+   
 
     public String getModelHistology(String modelID) {
 
@@ -302,6 +305,7 @@ public class PDXInfoUtil {
             PDXPatientClinicalReport[] result
                     = stub.getPDXPatientClinicalReports_sessionless(soapRequest).getGetPDXPatientClinicalReports_sessionlessResult().getPDXPatientClinicalReport();
 
+            
             if (result.length > 0) {
 
                 for (int i = 0; i < result.length; i++) {
@@ -313,6 +317,10 @@ public class PDXInfoUtil {
                     details.add(result[i].getTreatment_Naive());
 
                     modelDetails.put(clean(result[i].getModel()), details);
+                    
+                    
+                    System.out.println(clean(result[i].getModel())+" "+result[i].getParticipant_ID());
+                            
 
                 }
             }
@@ -448,6 +456,7 @@ public class PDXInfoUtil {
             String columns[] = {"Model ID", "Patient ID", "Gender", "Age", "Race", "Ethnicity", "Specimen Site", "Primary Site", "Initial Diagnosis", "Clinical Diagnosis",
                 "Tumor Type", "Grades", "Tumor Stage", "Sample Type", "Strain", "Mouse Sex", "Engraftment Site","Model Tag"};
 
+           
             if (result.length > 0) {
                 report.append("{\"pdxInfo\":[");
                 for (int i = 0; i < result.length; i++) {
@@ -482,7 +491,7 @@ public class PDXInfoUtil {
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getGrades())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getTumor_Stage())).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getSample_Type())).append(",\n");
-                        report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getStrain())).append(",\n");
+                        report.append("\"").append(columns[j++]).append("\":").append((clean(fixStrain(result[i].getStrain())))).append(",\n");
                         report.append("\"").append(columns[j++]).append("\":").append(clean(result[i].getMouseSex())).append(",\n");
                         report.append("\"").append("QC").append("\":\"").append(qc).append("\",\n");
                         if (socMap.containsKey(id)) {
@@ -531,12 +540,26 @@ public class PDXInfoUtil {
 
     // if engraftment site is not provided it is ''
     private String fixEngraftment(String in) {
+        
+        System.out.println("Engraftment Site:"+in);
+        
         if (in == null || in.trim().length() == 0) {
             // formerly sub q but not anymore
             return "";
         } else {
             return in;
         }
+        
+        
+    }
+    
+     private String fixStrain(String strain){
+      System.out.print(strain);
+        if(strain != null && strain.startsWith("NSG")){
+            strain =NSG_OFFICIAL_NAME;
+        }
+       
+        return strain;
     }
 
     private PDXDAO getPDXDAO() {

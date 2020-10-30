@@ -27,6 +27,11 @@
               scope="request">
         </action>
         
+         <action path="/TSVData"
+              type="org.jax.mgi.mtb.pdxinfo.TSVPDXInfoAction"
+              scope="request">
+        </action>
+        
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

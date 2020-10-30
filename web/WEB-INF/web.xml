@@ -17,6 +17,14 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
+    
+     <servlet>
+        <description>Initialization Servlet that initializes global variables</description>
+        <servlet-name>init</servlet-name>
+        <servlet-class>org.jax.mgi.mtb.pdxinfo.Init</servlet-class>
+        
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
