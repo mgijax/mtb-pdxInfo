@@ -60,6 +60,10 @@ public class TSVPDXInfoAction extends Action {
             response.getWriter().write(util.getSharing());
         }
         
+        else if(request.getParameter("modelsWithVariationData")!=null){
+            response.getWriter().write(util.getModelsWithVariationData());
+        }
+        
       
 
         response.flushBuffer();

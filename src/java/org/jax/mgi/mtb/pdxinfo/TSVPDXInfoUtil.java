@@ -84,6 +84,7 @@ public class TSVPDXInfoUtil {
     private static ArrayList<Model> modelCache = new ArrayList();
     private static ArrayList<Validation> validationCache = new ArrayList();
     private static ArrayList<Sharing> sharingCache = new ArrayList();
+    private static String variationModels = "";
     
     public static void main(String[] args){
         TSVPDXInfoUtil util = new TSVPDXInfoUtil();
@@ -159,6 +160,11 @@ public class TSVPDXInfoUtil {
             sb.append(s.toString()).append("\n");
         }
         return sb.toString();
+    }
+    
+    public String getModelsWithVariationData(){
+        checkInitialized();
+        return variationModels;
     }
   
     private void checkInitialized(){
@@ -320,145 +326,124 @@ public class TSVPDXInfoUtil {
                          
                           log.info("Loading data for "+id);
                          
-                       Patient pat = new Patient();
-                       pat.setId(patientID);
-                       pat.setSex(result[i].getGender());
-                       pat.setEthnicity(result[i].getEthnicity());
-                       pat.setEthncityAssesement("Self reported");
-                       pat.setDiagnosis(getDiagnosis(clean(result[i].getInitial_Diagnosis()), clean(result[i].getClinical_Diagnosis())));
-                       pat.setAgeAtDiagnosis(result[i].getPatient_Age());
-                       
-                       pat.setHistory(NOT_SPECIFIED);
-                       
-                       patients.add(pat);
-                       
-                       Sample sam = new Sample();
-                       
-                       
-                       // only have age at diagnosis
-                       sam.setAge(NOT_SPECIFIED);
-                       
-                       String date = result[i].getCollection_Date().split("T")[0];
-                       
-                       sam.setCollectionDate(date);
-                       sam.setCollectionEvent(NOT_SPECIFIED);
-                       sam.setCollectionSite(result[i].getSpecimen_Site());
-                       sam.setDiagnosis(pat.getDiagnosis());
-                       sam.setGrade(result[i].getGrades());
-                       
-                        // assume AJCC is correct
-                       sam.setGradeSystem("AJCC");
-                       sam.setStage(result[i].getTumor_Stage());
-                       sam.setStageSystem("AJCC");
-                       
-                       sam.setModelID(id);
-                       sam.setMonthsSinceCollection(NOT_SPECIFIED);
-                      
-                      
-                       
-                       sam.setPatientID(patientID);
-                       
-                       sam.setPrimarySite(result[i].getPrimary_Site());
-                       
-                       // !!!need to figure this out
-                      
+                            Patient pat = new Patient();
+                            pat.setId(patientID);
+                            pat.setSex(result[i].getGender());
+                            pat.setEthnicity(result[i].getEthnicity());
+                            pat.setEthncityAssesement("Self reported");
+                            pat.setDiagnosis(getDiagnosis(clean(result[i].getInitial_Diagnosis()), clean(result[i].getClinical_Diagnosis())));
+                            pat.setAgeAtDiagnosis(result[i].getPatient_Age());
 
-                        ArrayList<String> details = modelClincalDetails.get(clean(id));
-                        String treatmentNaive = "Unknown";
-                        if (details != null && details.get(1) != null && details.get(1).trim().length() > 0) {
-                     //       pat.setHistory(details.get(0));
-                            treatmentNaive = details.get(1);
-                        }
-                        
-                       
-                       
-                       sam.setPriorTreatment(NOT_SPECIFIED);
-                       sam.setTreated(NOT_SPECIFIED);
-                       sam.setTreatmentNaiveAtCollection(treatmentNaive);
-                       
-                       
-                        
-                       
-                       sam.setShareable("YES");
-                       sam.setTumorType(result[i].getTumor_Type());
-                       
-                      
-                       sam.setVirologyStatus(NOT_SPECIFIED);
-                       
-                       ArrayList<String> sampleIDs = getModelSamples(id);
-                       for(String sampleID : sampleIDs){
-                           Sample sample = sam.copy(sam);
-                           sample.setSampleID(sampleID);
-                           samples.add(sample);
-                       }
-                       
-                       
-                       
-                       Model mo = new Model();
-                       
-                       mo.setModelId(id);
-                       mo.setEngraftmentSite(fixEngraftment(result[i].getEngraftmentSite()));
-                     
-                       mo.setHostStrain("NSG(NOD scid gamma)");
-                       mo.setHostStrainFull(NSG_OFFICIAL_NAME);
-                       mo.setPassage(NOT_SPECIFIED);
-                       
-                       
-                       StringBuilder pubs = new StringBuilder();
-                        for (PDXLink link : dao.getLinks(id)) {
-                            if(link.getCharacterization() == PDXContent.REFERENCE){
-                                if(link.getPubMedID()!= null && link.getPubMedID().trim().length()>0){
-                                    if(pubs.length()>0){
-                                        pubs.append(",");
-                                    }
-                                    pubs.append(link.getPubMedID());
-                                }
+                            pat.setHistory(NOT_SPECIFIED);
+
+                            patients.add(pat);
+
+                            Sample sam = new Sample();
+
+
+                            // only have age at diagnosis
+                            sam.setAge(NOT_SPECIFIED);
+
+                            String date = result[i].getCollection_Date().split("T")[0];
+
+                            sam.setCollectionDate(date);
+                            sam.setCollectionEvent(NOT_SPECIFIED);
+                            sam.setCollectionSite(result[i].getSpecimen_Site());
+                            sam.setDiagnosis(pat.getDiagnosis());
+                            sam.setGrade(result[i].getGrades());
+                            sam.setGradeSystem("AJCC");
+                            sam.setStage(result[i].getTumor_Stage());
+                            sam.setStageSystem("AJCC");
+                            sam.setModelID(id);
+                            sam.setMonthsSinceCollection(NOT_SPECIFIED);
+                            sam.setPatientID(patientID);
+                            sam.setPrimarySite(result[i].getPrimary_Site());
+
+
+                             ArrayList<String> details = modelClincalDetails.get(clean(id));
+                             String treatmentNaive = "Unknown";
+                             if (details != null && details.get(1) != null && details.get(1).trim().length() > 0) {
+                          //       pat.setHistory(details.get(0));
+                                 treatmentNaive = details.get(1);
+                             }
+
+                            sam.setPriorTreatment(NOT_SPECIFIED);
+                            sam.setTreated(NOT_SPECIFIED);
+                            sam.setTreatmentNaiveAtCollection(treatmentNaive);
+                            sam.setShareable("YES");
+                            sam.setTumorType(result[i].getTumor_Type());
+                            sam.setVirologyStatus(NOT_SPECIFIED);
+
+                            ArrayList<String> sampleIDs = getModelSamples(id);
+                            for(String sampleID : sampleIDs){
+                                Sample sample = sam.copy(sam);
+                                sample.setSampleID(sampleID);
+                                samples.add(sample);
                             }
+
+                            Model mo = new Model();
+
+                            mo.setModelId(id);
+                            mo.setEngraftmentSite(fixEngraftment(result[i].getEngraftmentSite()));
+                            mo.setHostStrain("NSG(NOD scid gamma)");
+                            mo.setHostStrainFull(NSG_OFFICIAL_NAME);
+                            mo.setPassage(NOT_SPECIFIED);
+
+                            StringBuilder pubs = new StringBuilder();
+                             for (PDXLink link : dao.getLinks(id)) {
+                                 if(link.getCharacterization() == PDXContent.REFERENCE){
+                                     if(link.getPubMedID()!= null && link.getPubMedID().trim().length()>0){
+                                         if(pubs.length()>0){
+                                             pubs.append(",");
+                                         }
+                                         pubs.append(link.getPubMedID());
+                                     }
+                                 }
+                              }
+                            mo.setPublications(pubs.toString());
+                            String eType = HETEROTOPIC;
+                            if(result[i].getEngraftmentSite()!= null && result[i].getEngraftmentSite().toLowerCase().contains("fat") &&
+                                    sam.getCollectionSite().toLowerCase().contains("breast")){
+                                eType = ORTHOTOPIC;
+                            }
+
+                            mo.setEngraftmentType(eType);
+                            mo.setSampleType(clean(result[i].getSample_Type()));
+
+                            models.add(mo);
+
+                            Validation val = new Validation();
+                            val.setModelId(id);
+                            if (result[i].getModel_Status().indexOf("QC Complete") != -1) {
+
+                                 val.setValidationTechnique(VALIDATION_PENDING);
+                                 val.setDescription(VALIDATION_PENDING);
+                            }else{
+                                 val.setValidationTechnique(VALIDATION);
+                                 val.setDescription(VALIDATION_DESCRIPTION);
+                            }
+
+                            val.setPassagesTested(NOT_SPECIFIED);
+                            val.setValidationHostStrainFull(mo.getHostStrainFull());
+
+                            validations.add(val);
+
+                            Sharing sharon = new Sharing();
+                            sharon.setModelId(id);
+                            sharon.setAccessibility("Academia and Industry");
+                            sharon.setDatabaseUrl("http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID="+id);
+                            sharon.setFormUrl("http://tumor.informatics.jax.org/mtbwi/pdxRequest.do?mice="+id);
+                            sharon.setProject("JAX PDX");
+                            sharon.setProviderName("The Jackson Laboratory");
+                            sharon.setProviderAbbreviation("JAX");
+                            sharon.setProviderType("Academia");
+                            sharon.setEropdx_accessibility_modlaity("Not Applicable");
+                            sharon.setEmail("micetech@jax.org");
+                            sharon.setName("micetech");
+
+                            sharings.add(sharon);
+
                          }
-                       mo.setPublications(pubs.toString());
-                       String eType = HETEROTOPIC;
-                       if(result[i].getEngraftmentSite()!= null && result[i].getEngraftmentSite().toLowerCase().contains("fat") &&
-                               sam.getCollectionSite().toLowerCase().contains("breast")){
-                           eType = ORTHOTOPIC;
-                       }
-                     
-                       mo.setEngraftmentType(eType);
-                       mo.setSampleType(clean(result[i].getSample_Type()));
-                       
-                       models.add(mo);
-                       
-                       Validation val = new Validation();
-                       val.setModelId(id);
-                       if (result[i].getModel_Status().indexOf("QC Complete") != -1) {
-                       
-                            val.setValidationTechnique(VALIDATION_PENDING);
-                            val.setDescription(VALIDATION_PENDING);
-                       }else{
-                            val.setValidationTechnique(VALIDATION);
-                            val.setDescription(VALIDATION_DESCRIPTION);
-                       }
-                       
-                       val.setPassagesTested(NOT_SPECIFIED);
-                       val.setValidationHostStrainFull(mo.getHostStrainFull());
-                       
-                       validations.add(val);
-                       
-                       Sharing sharon = new Sharing();
-                       sharon.setModelId(id);
-                       sharon.setAccessibility("Academia and Industry");
-                       sharon.setDatabaseUrl("http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID="+id);
-                       sharon.setFormUrl("http://tumor.informatics.jax.org/mtbwi/pdxRequest.do?mice="+id);
-                       sharon.setProject("JAX PDX");
-                       sharon.setProviderName("The Jackson Laboratory");
-                       sharon.setProviderAbbreviation("JAX");
-                       sharon.setProviderType("Academia");
-                       sharon.setEropdx_accessibility_modlaity("Not Applicable");
-                       sharon.setEmail("micetech@jax.org");
-                       sharon.setName("micetech");
-                      
-                       sharings.add(sharon);
-                       
-                    }
                 }
             }
             
@@ -467,6 +452,8 @@ public class TSVPDXInfoUtil {
             modelCache = models;
             validationCache = validations;
             sharingCache = sharings;
+            
+            variationModels = loadModelsWithVariationData();
            
             initialized = true;
          
@@ -475,6 +462,30 @@ public class TSVPDXInfoUtil {
         }
 
         
+    }
+    
+    private String loadModelsWithVariationData(){
+        
+        StringBuilder modelIDs = new StringBuilder();
+        
+        for(Model m : modelCache){
+            try{
+             String params = "?keepnulls=yes&model=" + m.getModelId() + "&limit=5&filter=yes";
+             JSONObject job = new JSONObject(getJSON(VARIANTS + params, null));
+             log.info("checking for variation data for "+m.getModelId());
+                if(job.has("total_rows")){
+                    int total = (Integer) job.get("total_rows");
+                    if(total >0){
+                        modelIDs.append(m.getModelId()).append("\n");
+                    }
+                }
+                
+            }catch(Exception e){
+                log.error("Unable to check for variation data for model "+m.getModelId(),e);
+            }
+        }
+        
+        return modelIDs.toString();
     }
     
     
