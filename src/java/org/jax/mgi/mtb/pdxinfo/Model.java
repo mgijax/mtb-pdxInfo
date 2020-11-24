@@ -16,6 +16,7 @@ public class Model {
     private String engraftmentSite;
     private String engraftmentType;
     private String sampleType;
+    private String sampleState;
     private String passage;
     private String publications;
 
@@ -145,10 +146,25 @@ public class Model {
                 this.engraftmentSite+del+
                 this.engraftmentType+del+
                 this.sampleType+del+
+                this.sampleState+del+
                 this.passage+del+
                 this.publications;
 
                 
+    }
+
+    /**
+     * @return the sampleState
+     */
+    public String getSampleState() {
+        return sampleState;
+    }
+
+    /**
+     * @param sampleState the sampleState to set
+     */
+    public void setSampleState(String sampleState) {
+        this.sampleState = sampleState;
     }
     
 }

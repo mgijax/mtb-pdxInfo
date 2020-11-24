@@ -88,9 +88,9 @@ public class TSVPDXInfoUtil {
     
     public static void main(String[] args){
         TSVPDXInfoUtil util = new TSVPDXInfoUtil();
-     //   util.getClinicalDetails();
-     //   util.getPDXInfo();
-        System.out.println(util.getVariationTSV("TM00330"));
+        util.getClinicalDetails();
+        util.loadPDXInfo();
+        System.out.println(util.getModels());
     }
 
     public TSVPDXInfoUtil() {
@@ -115,7 +115,7 @@ public class TSVPDXInfoUtil {
     public String getPatients(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Patient.columns));
+        sb.append(String.join("\t",Patient.columns)).append("\n");
         for(Patient p : patientCache){
             sb.append(p.toString()).append("\n");
         }
@@ -125,7 +125,7 @@ public class TSVPDXInfoUtil {
     public String getSamples(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Sample.columns));
+        sb.append(String.join("\t",Sample.columns)).append("\n");
         for(Sample s : sampleCache){
             sb.append(s.toString()).append("\n");
         }
@@ -135,7 +135,7 @@ public class TSVPDXInfoUtil {
     public String getModels(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Model.columns));
+        sb.append(String.join("\t",Model.columns)).append("\n");
         for(Model m : modelCache){
             sb.append(m.toString()).append("\n");
         }
@@ -145,7 +145,7 @@ public class TSVPDXInfoUtil {
     public String getValidations(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Validation.columns));
+        sb.append(String.join("\t",Validation.columns)).append("\n");
         for(Validation v : validationCache){
             sb.append(v.toString()).append("\n");
         }
@@ -155,7 +155,7 @@ public class TSVPDXInfoUtil {
     public String getSharing(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Sharing.columns));
+        sb.append(String.join("\t",Sharing.columns)).append("\n");
         for(Sharing s : sharingCache){
             sb.append(s.toString()).append("\n");
         }
@@ -269,13 +269,17 @@ public class TSVPDXInfoUtil {
     
     private void loadPDXInfo() {
         
-        ArrayList<Patient> patients = new ArrayList();
-        ArrayList<Sample> samples  = new ArrayList();
-        ArrayList<Model> models = new ArrayList();
-        ArrayList<Validation> validations = new ArrayList();
-        ArrayList<Sharing> sharings = new ArrayList();
         
-       
+        HashMap<String,String> patientModels = new HashMap<>();
+        // for deduplication
+        HashMap<String,Sample> samplesMap  = new HashMap<>();
+        HashMap<String,Patient> patientsMap = new HashMap<>();
+        HashMap<String,Model> modelsMap = new HashMap<>();
+        HashMap<String,Validation> validationsMap = new HashMap<>();
+        HashMap<String,Sharing> sharingsMap = new HashMap<>();
+        
+        
+        
         try {
 
             getClinicalDetails();
@@ -336,7 +340,7 @@ public class TSVPDXInfoUtil {
 
                             pat.setHistory(NOT_SPECIFIED);
 
-                            patients.add(pat);
+                            patientsMap.put(patientID,pat);
 
                             Sample sam = new Sample();
 
@@ -358,7 +362,7 @@ public class TSVPDXInfoUtil {
                             sam.setMonthsSinceCollection(NOT_SPECIFIED);
                             sam.setPatientID(patientID);
                             sam.setPrimarySite(result[i].getPrimary_Site());
-
+                           
 
                              ArrayList<String> details = modelClincalDetails.get(clean(id));
                              String treatmentNaive = "Unknown";
@@ -374,12 +378,11 @@ public class TSVPDXInfoUtil {
                             sam.setTumorType(result[i].getTumor_Type());
                             sam.setVirologyStatus(NOT_SPECIFIED);
 
-                            ArrayList<String> sampleIDs = getModelSamples(id);
-                            for(String sampleID : sampleIDs){
-                                Sample sample = sam.copy(sam);
-                                sample.setSampleID(sampleID);
-                                samples.add(sample);
-                            }
+                          
+                            sam.setSampleID(id+"_PS");
+                            samplesMap.put(sam.getSampleID(),sam);
+                       //     System.out.println("model:"+id+"\t sampleID:"+id+"\t patient:"+patientID);
+
 
                             Model mo = new Model();
 
@@ -409,8 +412,10 @@ public class TSVPDXInfoUtil {
 
                             mo.setEngraftmentType(eType);
                             mo.setSampleType(clean(result[i].getSample_Type()));
+                            mo.setSampleState(NOT_SPECIFIED);
 
-                            models.add(mo);
+                            modelsMap.put(id,mo);
+     
 
                             Validation val = new Validation();
                             val.setModelId(id);
@@ -426,7 +431,7 @@ public class TSVPDXInfoUtil {
                             val.setPassagesTested(NOT_SPECIFIED);
                             val.setValidationHostStrainFull(mo.getHostStrainFull());
 
-                            validations.add(val);
+                            validationsMap.put(id,val);
 
                             Sharing sharon = new Sharing();
                             sharon.setModelId(id);
@@ -441,21 +446,23 @@ public class TSVPDXInfoUtil {
                             sharon.setEmail("micetech@jax.org");
                             sharon.setName("micetech");
 
-                            sharings.add(sharon);
+                            sharingsMap.put(id,sharon);
 
                          }
                 }
             }
             
-            patientCache = patients;
-            sampleCache = samples;
-            modelCache = models;
-            validationCache = validations;
-            sharingCache = sharings;
+            patientCache.addAll(patientsMap.values());
+            sampleCache.addAll(samplesMap.values());
+            modelCache.addAll(modelsMap.values());
+            validationCache.addAll(validationsMap.values());
+            sharingCache.addAll(sharingsMap.values());
             
             variationModels = loadModelsWithVariationData();
            
             initialized = true;
+            
+           
          
         } catch (Exception e) {
             log.error("Error gettting PDX Info not updating chached values",e);
@@ -552,27 +559,27 @@ public class TSVPDXInfoUtil {
   
 
     
-    private ArrayList<String> getModelSamples(String id){
-        ArrayList<String> samples = new ArrayList();
-        HashMap<String,String> deDupe = new HashMap();
-        String url ="http://pdxdata.jax.org/api/inventory?model="+id;
-        try{
-            JSONObject job = new JSONObject(getJSON(url));
-            JSONArray jarray = job.getJSONArray("data");
-            for(int i = 0; i < jarray.length(); i++){
-                JSONObject j = jarray.getJSONObject(i);
-                deDupe.put(j.getString("sample_name"),j.getString("sample_name"));
-            }
-            
-            for(String sampleID : deDupe.keySet()){
-                samples.add(sampleID);
-            }
-                    
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return samples;
-    }
+//    private ArrayList<String> getModelSamples(String id){
+//        ArrayList<String> samples = new ArrayList();
+//        HashMap<String,String> deDupe = new HashMap();
+//        String url ="http://pdxdata.jax.org/api/inventory?model="+id;
+//        try{
+//            JSONObject job = new JSONObject(getJSON(url));
+//            JSONArray jarray = job.getJSONArray("data");
+//            for(int i = 0; i < jarray.length(); i++){
+//                JSONObject j = jarray.getJSONObject(i);
+//                deDupe.put(j.getString("sample_name"),j.getString("sample_name"));
+//            }
+//            
+//            for(String sampleID : deDupe.keySet()){
+//                samples.add(sampleID);
+//            }
+//                    
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return samples;
+//    }
 
     private String getDiagnosis(String initial, String clinical){
         String diagnosis = initial;

@@ -35,24 +35,24 @@ public class TSVPDXInfoAction extends Action {
         response.setContentType("text/plain");
 
         
-        String modelID = request.getParameter("modelVariation");
+        String modelID = request.getParameter("model_variation");
         if (modelID != null) {
             response.getWriter().write(util.getVariationTSV(modelID));
         }
         
-        else if(request.getParameter("patients")!=null){
+        else if(request.getParameter("patient")!=null){
             response.getWriter().write(util.getPatients());
         }
         
-        else if(request.getParameter("samples")!=null){
+        else if(request.getParameter("sample")!=null){
             response.getWriter().write(util.getSamples());
         }
         
-        else if(request.getParameter("models")!=null){
+        else if(request.getParameter("model")!=null){
             response.getWriter().write(util.getModels());
         }
         
-        else if(request.getParameter("validation")!=null){
+        else if(request.getParameter("model_validation")!=null){
             response.getWriter().write(util.getValidations());
         }
         

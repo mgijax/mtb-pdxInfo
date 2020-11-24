@@ -17,7 +17,7 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
-    
+   
      <servlet>
         <description>Initialization Servlet that initializes global variables</description>
         <servlet-name>init</servlet-name>
