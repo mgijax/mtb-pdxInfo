@@ -21,11 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 import org.apache.log4j.Logger;
-//import org.apache.axiom.soap.SOAP11Constants;
 import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXComment;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXContent;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXDAO;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXGraphic;
@@ -47,13 +44,13 @@ public class TSVPDXInfoUtil {
 
     private static String baseURI = "http://pdxdata.jax.org/api/";
 
-    private static String VARIANTS = baseURI + "variants";
-    private static String CNV = baseURI+"/cnv_gene?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
-    private static String EXP = baseURI+"/expression?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
+    private static String VARIANT_URL = baseURI + "variants";
+    private static String CNA_URL = baseURI+"cnv_gene?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
+    private static String EXP_URL = baseURI+"expression?filter=yes&keepnulls=yes&all_ctp_genes=yes&model=";
 
-    private static String JSON_PDX_INFO;
+    
 
-    private static final String graphicURL = "http://tumor.informatics.jax.org/mtbwi/pdxDetailsTabs.do?tab=graphicDetails&contentKey=";
+    private static final String GRAPHIC_URL = "http://tumor.informatics.jax.org/mtbwi/pdxDetailsTabs.do?tab=graphicDetails&contentKey=";
 
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ";
     
@@ -84,13 +81,19 @@ public class TSVPDXInfoUtil {
     private static ArrayList<Model> modelCache = new ArrayList();
     private static ArrayList<Validation> validationCache = new ArrayList();
     private static ArrayList<Sharing> sharingCache = new ArrayList();
+    private static ArrayList<Cytogenetics> cytoCache = new ArrayList();
     private static String variationModels = "";
+    private static String cnaModels = "";
+    private static String expModels = "";
     
     public static void main(String[] args){
         TSVPDXInfoUtil util = new TSVPDXInfoUtil();
-        util.getClinicalDetails();
-        util.loadPDXInfo();
-        System.out.println(util.getModels());
+        //util.getClinicalDetails();
+      //  util.loadPDXInfo();
+      //  System.out.println(util.getCNA("TM00099"));
+     
+      //  System.out.println(util.loadModelsWithCNAData());
+      
     }
 
     public TSVPDXInfoUtil() {
@@ -162,9 +165,29 @@ public class TSVPDXInfoUtil {
         return sb.toString();
     }
     
+    public String getCytogenetics(){
+        checkInitialized();
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.join("\t",Cytogenetics.columns)).append("\n");
+        for(Cytogenetics c : cytoCache){
+            sb.append(c.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+    
     public String getModelsWithVariationData(){
         checkInitialized();
         return variationModels;
+    }
+    
+     public String getModelsWithCNAData(){
+        checkInitialized();
+        return cnaModels;
+    }
+     
+    public String getModelsWithExpData(){
+        checkInitialized();
+        return expModels;
     }
   
     private void checkInitialized(){
@@ -187,7 +210,7 @@ public class TSVPDXInfoUtil {
             do {
 
                 String params = "?keepnulls=yes&model=" + model + "&skip=" + skip + "&limit=" + limit + "&filter=yes";
-                JSONObject job = new JSONObject(getJSON(VARIANTS + params, null));
+                JSONObject job = new JSONObject(getJSON(VARIANT_URL + params, null));
 
                 if(job.has("total_rows")){
                     int total = (Integer) job.get("total_rows");
@@ -258,9 +281,130 @@ public class TSVPDXInfoUtil {
         }
         return sb.toString();
     }
+     
+     public String getCNA(String modelID){
+         
+         StringBuilder sb = new StringBuilder(CNA.getColumnHeaders("\t")).append("\n");
+         
+     
+          try{
+             
+            JSONObject job = new JSONObject(getJSON(CNA_URL+modelID));
+            JSONArray result = job.getJSONArray("data");
+            for(int i = 0; i < result.length(); i++){
+                CNA cna = new CNA();
+                JSONObject row = result.getJSONObject(i);
+     
+                cna.setModel_id(row.getString("model_name"));
+                cna.setSample_id(row.getString("sample_name"));
+                cna.setSample_origin("PDX");
+                cna.setPassage(row.getString("passage_num"));
+                cna.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+                cna.setChromosome(row.getString("chromosome"));
+                cna.setSeq_start_position(row.getString("gene_start_bp"));
+                cna.setSeq_end_position(row.getString("gene_end_bp"));
+                cna.setSymbol(row.getString("gene_symbol"));
+                cna.setUcsc_gene_id("");
+                cna.setNcbi_gene_id("");
+                cna.setEnsembl_gene_id(row.getString("ensembl_gene_id"));
+                cna.setLog10r_cna("");
+                cna.setLog2r_cna(row.getString("logratio_2"));
+                cna.setFold_change(row.getString("cn_raw"));
+                cna.setCopy_number_status("");
+                cna.setGistic_value("");
+                cna.setPicnic_value("");
+                cna.setGenome_assembly(ASSEMBLY_38);
+                cna.setPlatform(row.getString("platform"));
+                
+                sb.append(cna.toString()).append("\n");
+            }
     
-
+          }catch(Exception e){
+              log.error(e);
+              e.printStackTrace();
+          }
+         return sb.toString();
+         }
+     
+      public String getExpression(String modelID){
+         
+         StringBuilder sb = new StringBuilder(Expression.getColumnHeaders("\t")).append("\n");
+         
+     
+          try{
+             
+            JSONObject job = new JSONObject(getJSON(EXP_URL+modelID));
+            JSONArray result = job.getJSONArray("data");
+            for(int i = 0; i < result.length(); i++){
+                
+                
+            //                 model_id;
+            //                 sample_id;
+            //                 sample_origin;
+            //                 host_strain_nomenclature;
+            //                 passage;
+            //                 chromosome;
+            //                 strand;
+            //                 seq_start_position;
+            //                 seq_end_position;
+            //                 symbol;
+            //                 ucsc_gene_id;
+            //                 ncbi_gene_id;
+            //                 ensembl_gene_id;
+            //                 ensembl_transcript_id;
+            //                 rnaseq_coverage;
+            //                 rnaseq_fpkm;
+            //                 rnaseq_tpm;
+            //                 rnaseq_count;
+            //                 affy_hgea_probe_id;
+            //                 affy_hgea_expression_value;
+            //                 illumina_hgea_probe_id;
+            //                 illumina_hgea_expression_value;
+            //                 z_score;
+            //                 genome_assembly;
+            //                 platform;
+                
+                Expression expr = new Expression();
+                JSONObject row = result.getJSONObject(i);
+     
+                expr.setModel_id(row.getString("model_name"));
+                expr.setSample_id(row.getString("sample_name"));
+                expr.setSample_origin("PDX");
+                expr.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+                expr.setPassage(row.getString("passage_num"));
+                expr.setChromosome("");
+                expr.setStrand("");
+                expr.setSeq_start_position("");
+                expr.setSeq_end_position("");
+                expr.setSymbol(row.getString("gene_symbol"));
+                expr.setUcsc_gene_id("");
+                expr.setNcbi_gene_id("");
+                expr.setEnsembl_gene_id(row.getString("ensembl_gene_id"));
+                expr.setEnsembl_transcript_id("");
+                expr.setRnaseq_coverage("");
+                expr.setRnaseq_fpkm(row.getString("fpkm"));
+                expr.setRnaseq_tpm(row.getString("tpm"));
+                expr.setRnaseq_count("");
+                expr.setAffy_hgea_probe_id("");
+                expr.setAffy_hgea_expression_value("");
+                expr.setIllumina_hgea_probe_id("");
+                expr.setIllumina_hgea_expression_value("");
+                expr.setZ_score(row.getString("z_score_expression"));
+                expr.setGenome_assembly(ASSEMBLY_38);
+                expr.setPlatform(row.getString("platform"));
+                
+                sb.append(expr.toString()).append("\n");
+            }
+    
+          }catch(Exception e){
+              log.error(e);
+              e.printStackTrace();
+          }
+         return sb.toString();
+         }
    
+   
+     
    
 
     // produces Patients, Samples, Models, validations, sharings  TSV reports for all models
@@ -270,8 +414,8 @@ public class TSVPDXInfoUtil {
     private void loadPDXInfo() {
         
         
-        HashMap<String,String> patientModels = new HashMap<>();
-        // for deduplication
+       
+        
         HashMap<String,Sample> samplesMap  = new HashMap<>();
         HashMap<String,Patient> patientsMap = new HashMap<>();
         HashMap<String,Model> modelsMap = new HashMap<>();
@@ -390,7 +534,8 @@ public class TSVPDXInfoUtil {
                             mo.setEngraftmentSite(fixEngraftment(result[i].getEngraftmentSite()));
                             mo.setHostStrain("NSG(NOD scid gamma)");
                             mo.setHostStrainFull(NSG_OFFICIAL_NAME);
-                            mo.setPassage(NOT_SPECIFIED);
+                            // default P1 per Carol's email shouldn't really be collecting this as model data
+                            mo.setPassage("P1");
 
                             StringBuilder pubs = new StringBuilder();
                              for (PDXLink link : dao.getLinks(id)) {
@@ -458,8 +603,15 @@ public class TSVPDXInfoUtil {
             validationCache.addAll(validationsMap.values());
             sharingCache.addAll(sharingsMap.values());
             
+            loadCytogenetics();
+            
             variationModels = loadModelsWithVariationData();
-           
+            cnaModels = loadModelsWithCNAData();
+            expModels = loadModelsWithEXPData();
+          
+            
+            
+            
             initialized = true;
             
            
@@ -471,6 +623,69 @@ public class TSVPDXInfoUtil {
         
     }
     
+    
+    private void loadCytogenetics(){
+        PDXDAO dao = getPDXDAO();
+        
+        ArrayList<PDXGraphic> histologyImages = dao.getHistologyImages();
+        
+        for(PDXGraphic graphic: histologyImages){
+        
+            Cytogenetics cyto = new Cytogenetics();
+            
+//            private String sample_id;
+//            private String sample_origin;
+//            private String passage;
+//            private String host_strain_nomenclature;
+//            private String model_id;
+//            private String marker_name;
+//            private String marker_status;
+//            private String essential_or_additional_marker;
+//            private String technique_name;
+//            private String protocol_file_name;
+//            private String result_file_name;
+//        
+
+            String sample = NOT_SPECIFIED;
+            String origin = "zenograft";
+            String passage = NOT_SPECIFIED;
+            if(graphic.getDescription().split(" ") != null){
+                String[] desc = graphic.getDescription().split(" ");
+                
+                if(desc[0].equals("Patient")){
+                    origin = "patient";
+                    passage = "";
+                    sample = graphic.getModelID()+"_PT";
+                }
+                if(desc[0].length()==2 && desc[0].startsWith("P")){
+                    passage = desc[0];
+
+                }
+                
+                System.out.println(graphic.getDescription());
+                System.out.println("\t"+sample);
+                System.out.println("\t"+origin);
+                System.out.println("\t"+passage);
+            }
+
+            cyto.setSample_id(sample);
+            cyto.setSample_origin(origin);
+            cyto.setPassage(passage);
+            cyto.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+            cyto.setModel_id(graphic.getModelID());
+            cyto.setMarker_name("");
+            cyto.setMarker_status("");
+            cyto.setEssential_or_additional_marker("");
+            cyto.setTechnique_name("");
+            cyto.setProtocol_file_name("");
+            cyto.setResult_file_name(GRAPHIC_URL+graphic.getFileName());
+            
+            cytoCache.add(cyto);
+                    
+        }
+    }
+    
+    
     private String loadModelsWithVariationData(){
         
         StringBuilder modelIDs = new StringBuilder();
@@ -478,7 +693,7 @@ public class TSVPDXInfoUtil {
         for(Model m : modelCache){
             try{
              String params = "?keepnulls=yes&model=" + m.getModelId() + "&limit=5&filter=yes";
-             JSONObject job = new JSONObject(getJSON(VARIANTS + params, null));
+             JSONObject job = new JSONObject(getJSON(VARIANT_URL + params, null));
              log.info("checking for variation data for "+m.getModelId());
                 if(job.has("total_rows")){
                     int total = (Integer) job.get("total_rows");
@@ -489,6 +704,56 @@ public class TSVPDXInfoUtil {
                 
             }catch(Exception e){
                 log.error("Unable to check for variation data for model "+m.getModelId(),e);
+            }
+        }
+        
+        return modelIDs.toString();
+    }
+    
+    
+    private String loadModelsWithCNAData(){
+        
+        StringBuilder modelIDs = new StringBuilder();
+        
+        for(Model m : modelCache){
+            try{
+             String params =  m.getModelId() + "&limit=5";
+             JSONObject job = new JSONObject(getJSON(CNA_URL + params, null));
+             log.info("checking for cna data for "+m.getModelId());
+                if(job.has("count")){
+                    int total = (Integer) job.get("count");
+                    if(total >0){
+                        modelIDs.append(m.getModelId()).append("\n");
+                    }
+                }
+                
+            }catch(Exception e){
+                log.error("Unable to check for CNA data for model "+m.getModelId(),e);
+            }
+        }
+        
+        return modelIDs.toString();
+    }
+    
+    
+     private String loadModelsWithEXPData(){
+        
+        StringBuilder modelIDs = new StringBuilder();
+        
+        for(Model m : modelCache){
+            try{
+             String params =  m.getModelId() + "&limit=5";
+             JSONObject job = new JSONObject(getJSON(EXP_URL + params, null));
+             log.info("checking for Expression data for "+m.getModelId());
+                if(job.has("count")){
+                    int total = (Integer) job.get("count");
+                    if(total >0){
+                        modelIDs.append(m.getModelId()).append("\n");
+                    }
+                }
+                
+            }catch(Exception e){
+                log.error("Unable to check for expression data for model "+m.getModelId(),e);
             }
         }
         

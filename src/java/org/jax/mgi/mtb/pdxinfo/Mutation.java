@@ -10,62 +10,62 @@ package org.jax.mgi.mtb.pdxinfo;
  * @author sbn
  */
 public class Mutation {
-    
-  static String[] columns = {"model_id",
-"sample_id",
-"sample_origin",
-"host_strain_nomenclature",
-"passage",
-"symbol",
-"biotype",
-"coding_sequence_change",
-"variant_class",
-"codon_change",
-"amino_acid_change",
-"consequence",
-"functional_prediction",
-"read_depth",
-"allele_frequency",
-"chromosome",
-"seq_start_position",
-"ref_allele",
-"alt_allele",
-"ucsc_gene_id",
-"ncbi_gene_id",
-"ncbi_transcript_id",
-"ensembl_gene_id",
-"ensembl_transcript_id",
-"variation_id",
-"genome_assembly",
-"platform"};
-  
-private String model_id ="";
-private String sample_id ="";
-private String sample_origin ="";
-private String host_strain_nomenclature ="";
-private String passage ="";
-private String symbol ="";
-private String biotype ="";
-private String coding_sequence_change ="";
-private String variant_class ="";
-private String codon_change ="";
-private String amino_acid_change ="";
-private String consequence ="";
-private String functional_prediction ="";
-private String read_depth ="";
-private String allele_frequency ="";
-private String chromosome ="";
-private String seq_start_position ="";
-private String ref_allele ="";
-private String alt_allele ="";
-private String ucsc_gene_id ="";
-private String ncbi_gene_id ="";
-private String ncbi_transcript_id ="";
-private String ensembl_gene_id ="";
-private String ensembl_transcript_id ="";
-private String variation_id ="";
-private String genome_assembly ="";
-private String platform ="";
+
+    static String[] columns = {"model_id",
+        "sample_id",
+        "sample_origin",
+        "host_strain_nomenclature",
+        "passage",
+        "symbol",
+        "biotype",
+        "coding_sequence_change",
+        "variant_class",
+        "codon_change",
+        "amino_acid_change",
+        "consequence",
+        "functional_prediction",
+        "read_depth",
+        "allele_frequency",
+        "chromosome",
+        "seq_start_position",
+        "ref_allele",
+        "alt_allele",
+        "ucsc_gene_id",
+        "ncbi_gene_id",
+        "ncbi_transcript_id",
+        "ensembl_gene_id",
+        "ensembl_transcript_id",
+        "variation_id",
+        "genome_assembly",
+        "platform"};
+
+    private String model_id = "";
+    private String sample_id = "";
+    private String sample_origin = "";
+    private String host_strain_nomenclature = "";
+    private String passage = "";
+    private String symbol = "";
+    private String biotype = "";
+    private String coding_sequence_change = "";
+    private String variant_class = "";
+    private String codon_change = "";
+    private String amino_acid_change = "";
+    private String consequence = "";
+    private String functional_prediction = "";
+    private String read_depth = "";
+    private String allele_frequency = "";
+    private String chromosome = "";
+    private String seq_start_position = "";
+    private String ref_allele = "";
+    private String alt_allele = "";
+    private String ucsc_gene_id = "";
+    private String ncbi_gene_id = "";
+    private String ncbi_transcript_id = "";
+    private String ensembl_gene_id = "";
+    private String ensembl_transcript_id = "";
+    private String variation_id = "";
+    private String genome_assembly = "";
+    private String platform = "";
 
     /**
      * @return the model_id
@@ -444,46 +444,46 @@ private String platform ="";
     public void setPlatform(String platform) {
         this.platform = platform;
     }
-  
-    public static String getColumnHeaders(){
+
+    public static String getColumnHeaders() {
         return getColumnHeaders("\t");
     }
-    
-    public static String getColumnHeaders(String delim){
+
+    public static String getColumnHeaders(String delim) {
         return String.join(delim, columns);
     }
-    
-    public String toString(){
+
+    public String toString() {
         return toString("\t");
     }
-    
-    public String toString(String delim){
-       return this.model_id+delim+
-        this.sample_id+delim+
-        this.sample_origin+delim+
-        this.host_strain_nomenclature+delim+
-        this.passage+delim+
-        this.symbol+delim+
-        this.biotype+delim+
-        this.coding_sequence_change+delim+
-        this.variant_class+delim+
-        this.codon_change+delim+
-        this.amino_acid_change+delim+
-        this.consequence+delim+
-        this.functional_prediction+delim+
-        this.read_depth+delim+
-        this.allele_frequency+delim+
-        this.chromosome+delim+
-        this.seq_start_position+delim+
-        this.ref_allele+delim+
-        this.alt_allele+delim+
-        this.ucsc_gene_id+delim+
-        this.ncbi_gene_id+delim+
-        this.ncbi_transcript_id+delim+
-        this.ensembl_gene_id+delim+
-        this.ensembl_transcript_id+delim+
-        this.variation_id+delim+
-        this.genome_assembly+delim+
-        this.platform;
+
+    public String toString(String delim) {
+        return this.model_id + delim
+                + this.sample_id + delim
+                + this.sample_origin + delim
+                + this.host_strain_nomenclature + delim
+                + this.passage + delim
+                + this.symbol + delim
+                + this.biotype + delim
+                + this.coding_sequence_change + delim
+                + this.variant_class + delim
+                + this.codon_change + delim
+                + this.amino_acid_change + delim
+                + this.consequence + delim
+                + this.functional_prediction + delim
+                + this.read_depth + delim
+                + this.allele_frequency + delim
+                + this.chromosome + delim
+                + this.seq_start_position + delim
+                + this.ref_allele + delim
+                + this.alt_allele + delim
+                + this.ucsc_gene_id + delim
+                + this.ncbi_gene_id + delim
+                + this.ncbi_transcript_id + delim
+                + this.ensembl_gene_id + delim
+                + this.ensembl_transcript_id + delim
+                + this.variation_id + delim
+                + this.genome_assembly + delim
+                + this.platform;
     }
 }

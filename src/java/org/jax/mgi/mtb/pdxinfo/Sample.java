@@ -341,30 +341,5 @@ public class Sample {
     }
     
     
-    public Sample copy(Sample in){
-        Sample copy = new Sample();
-        copy.setPatientID(in.getPatientID());
-        copy.setSampleID(in.getSampleID());
-        copy.setCollectionDate(in.getCollectionDate());
-        copy.setCollectionEvent(in.getCollectionEvent()); 
-        copy.setMonthsSinceCollection(in.getMonthsSinceCollection());
-        copy.setAge(in.getAge());
-        copy.setDiagnosis(in.getDiagnosis());
-        copy.setTumorType(in.getTumorType());
-        copy.setPrimarySite(in.getPrimarySite());
-        copy.setCollectionSite(in.getCollectionSite());
-        copy.setStage(in.getStage()); 
-        copy.setStageSystem(in.getStageSystem());
-        copy.setGrade(in.getGrade());
-        copy.setGradeSystem(in.getGradeSystem());
-        copy.setVirologyStatus(in.getVirologyStatus()); 
-        copy.setShareable(in.getShareable());
-        copy.setTreatmentNaiveAtCollection(in.getTreatmentNaiveAtCollection());
-        copy.setTreated(in.getTreated());
-        copy.setPriorTreatment(in.getPriorTreatment()); 
-        copy.setModelID(in.getModelID());
-        
-        return copy;
-        
-    }
+   
 }

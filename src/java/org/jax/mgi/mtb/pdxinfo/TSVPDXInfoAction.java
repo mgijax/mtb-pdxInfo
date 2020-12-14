@@ -34,8 +34,8 @@ public class TSVPDXInfoAction extends Action {
         
         response.setContentType("text/plain");
 
-        
         String modelID = request.getParameter("model_variation");
+        
         if (modelID != null) {
             response.getWriter().write(util.getVariationTSV(modelID));
         }
@@ -63,6 +63,32 @@ public class TSVPDXInfoAction extends Action {
         else if(request.getParameter("modelsWithVariationData")!=null){
             response.getWriter().write(util.getModelsWithVariationData());
         }
+        
+        else if(request.getParameter("cna")!=null){
+            modelID = request.getParameter("cna");
+            response.getWriter().write(util.getCNA(modelID));
+        }
+        
+         else if(request.getParameter("modelsWithCNAData")!=null){
+             
+            response.getWriter().write(util.getModelsWithCNAData());
+        }
+        
+        else if(request.getParameter("exp")!=null){
+            modelID = request.getParameter("exp");
+            response.getWriter().write(util.getExpression(modelID));
+        }
+        
+        else if(request.getParameter("modelsWithExpData")!=null){
+             
+            response.getWriter().write(util.getModelsWithExpData());
+        }
+        
+        else if(request.getParameter("cytogenetics")!=null){
+             
+            response.getWriter().write(util.getCytogenetics());
+        }
+        
         
       
 
