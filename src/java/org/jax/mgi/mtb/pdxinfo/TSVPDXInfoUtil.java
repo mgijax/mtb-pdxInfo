@@ -89,10 +89,12 @@ public class TSVPDXInfoUtil {
     public static void main(String[] args){
         TSVPDXInfoUtil util = new TSVPDXInfoUtil();
         //util.getClinicalDetails();
-      //  util.loadPDXInfo();
+        util.loadPDXInfo();
       //  System.out.println(util.getCNA("TM00099"));
      
       //  System.out.println(util.loadModelsWithCNAData());
+      
+      //  util.loadCytogenetics();
       
     }
 
@@ -227,7 +229,7 @@ public class TSVPDXInfoUtil {
                     if (!"Whole Exome".equals(getField(array.getJSONObject(i), "platform")) || includeWholeExome) {
 
                         Mutation mute = new Mutation();
-                        mute.setModel_id(getField(array.getJSONObject(i), "model_id"));
+                        mute.setModel_id(getField(array.getJSONObject(i), "model_name"));
                         mute.setSample_id(getField(array.getJSONObject(i), "sample_name"));
                         mute.setSample_origin("xenograft"); // verify we don't have any PT data for public comsumption
                         mute.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
@@ -519,14 +521,16 @@ public class TSVPDXInfoUtil {
                             sam.setTreated(NOT_SPECIFIED);
                             sam.setTreatmentNaiveAtCollection(treatmentNaive);
                             sam.setShareable("YES");
-                            sam.setTumorType(result[i].getTumor_Type());
+                            // PDXFinder request to use vocabulary
+                            // 'Primary' 'Recurrant' NOT_SPECIFIED
+                            sam.setTumorType(fixTumorType(result[i].getTumor_Type()));
                             sam.setVirologyStatus(NOT_SPECIFIED);
 
                           
                             sam.setSampleID(id+"_PS");
                             samplesMap.put(sam.getSampleID(),sam);
                        //     System.out.println("model:"+id+"\t sampleID:"+id+"\t patient:"+patientID);
-
+                       //     System.out.println(sam.toString());
 
                             Model mo = new Model();
 
@@ -649,8 +653,17 @@ public class TSVPDXInfoUtil {
             String sample = NOT_SPECIFIED;
             String origin = "zenograft";
             String passage = NOT_SPECIFIED;
+            String stain = NOT_SPECIFIED;
             if(graphic.getDescription().split(" ") != null){
                 String[] desc = graphic.getDescription().split(" ");
+                
+                for(int i = 0; i < desc.length-2; i++ ){
+                    if(desc[i].equals("stained") && desc[i+1].equals("for")){
+                        stain = desc[i+2].replace(".","");
+                        i = desc.length;
+                    }
+                               
+                }
                 
                 if(desc[0].equals("Patient")){
                     origin = "patient";
@@ -662,10 +675,11 @@ public class TSVPDXInfoUtil {
 
                 }
                 
-                System.out.println(graphic.getDescription());
-                System.out.println("\t"+sample);
-                System.out.println("\t"+origin);
-                System.out.println("\t"+passage);
+//                System.out.println(graphic.getDescription());
+//                System.out.println("\t"+sample);
+//                System.out.println("\t"+origin);
+//                System.out.println("\t"+passage);
+//                System.out.println("\t"+stain);
             }
 
             cyto.setSample_id(sample);
@@ -846,6 +860,20 @@ public class TSVPDXInfoUtil {
 //        return samples;
 //    }
 
+    // PDXFinder request to use vocabulary
+    // 'Primary' 'Recurrant' NOT_SPECIFIED, 'Metastatic'
+    private String fixTumorType(String tt){
+        if(tt == null || tt.isEmpty()){
+            tt=  NOT_SPECIFIED;
+        }else if (tt.contains("Primary")){
+            tt = "Primary";
+        }else if (tt.startsWith("Recurrent")){
+            tt = "Recurrent";
+        }
+        return tt;
+        
+    }
+    
     private String getDiagnosis(String initial, String clinical){
         String diagnosis = initial;
         if(initial == null || initial.trim().length() == 0){
