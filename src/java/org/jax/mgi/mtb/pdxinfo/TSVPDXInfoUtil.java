@@ -233,7 +233,7 @@ public class TSVPDXInfoUtil {
                         mute.setSample_id(getField(array.getJSONObject(i), "sample_name"));
                         mute.setSample_origin("xenograft"); // verify we don't have any PT data for public comsumption
                         mute.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
-                        mute.setPassage(getField(array.getJSONObject(i), "passage_num"));
+                        mute.setPassage(getPassage(getField(array.getJSONObject(i), "passage_num")));
                         mute.setSymbol(getField(array.getJSONObject(i), "gene_symbol"));
                         mute.setBiotype("");
                         mute.setCoding_sequence_change("");
@@ -299,8 +299,8 @@ public class TSVPDXInfoUtil {
      
                 cna.setModel_id(row.getString("model_name"));
                 cna.setSample_id(row.getString("sample_name"));
-                cna.setSample_origin("PDX");
-                cna.setPassage(row.getString("passage_num"));
+                cna.setSample_origin("xenograft");
+                cna.setPassage(getPassage(row.getString("passage_num")));
                 cna.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
                 cna.setChromosome(row.getString("chromosome"));
                 cna.setSeq_start_position(row.getString("gene_start_bp"));
@@ -371,9 +371,9 @@ public class TSVPDXInfoUtil {
      
                 expr.setModel_id(row.getString("model_name"));
                 expr.setSample_id(row.getString("sample_name"));
-                expr.setSample_origin("PDX");
+                expr.setSample_origin("xenograft");
                 expr.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
-                expr.setPassage(row.getString("passage_num"));
+                expr.setPassage(getPassage(row.getString("passage_num")));
                 expr.setChromosome("");
                 expr.setStrand("");
                 expr.setSeq_start_position("");
@@ -539,7 +539,7 @@ public class TSVPDXInfoUtil {
                             mo.setHostStrain("NSG(NOD scid gamma)");
                             mo.setHostStrainFull(NSG_OFFICIAL_NAME);
                             // default P1 per Carol's email shouldn't really be collecting this as model data
-                            mo.setPassage("P1");
+                            mo.setPassage("1");
 
                             StringBuilder pubs = new StringBuilder();
                              for (PDXLink link : dao.getLinks(id)) {
@@ -651,7 +651,7 @@ public class TSVPDXInfoUtil {
 //        
 
             String sample = NOT_SPECIFIED;
-            String origin = "zenograft";
+            String origin = "xenograft";
             String passage = NOT_SPECIFIED;
             String stain = NOT_SPECIFIED;
             if(graphic.getDescription().split(" ") != null){
@@ -684,7 +684,7 @@ public class TSVPDXInfoUtil {
 
             cyto.setSample_id(sample);
             cyto.setSample_origin(origin);
-            cyto.setPassage(passage);
+            cyto.setPassage(getPassage(passage));
             cyto.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
             cyto.setModel_id(graphic.getModelID());
             cyto.setMarker_name("");
@@ -860,6 +860,25 @@ public class TSVPDXInfoUtil {
 //        return samples;
 //    }
 
+    
+    private String getPassage(String p){
+        //default to 1 because we need some default but its an error
+        String passage = "1";
+        try{
+            p = p.replace("P", "");
+            try{
+                Integer i = new Integer(p);
+                passage = i.toString();
+            }catch(NumberFormatException nfe){
+                log.error("Passage "+p+" is not an integer!",nfe);
+            }
+        }catch(NullPointerException npe){
+            log.error("Passage is null",npe);
+        }
+        return passage;
+    }
+    
+    
     // PDXFinder request to use vocabulary
     // 'Primary' 'Recurrant' NOT_SPECIFIED, 'Metastatic'
     private String fixTumorType(String tt){
