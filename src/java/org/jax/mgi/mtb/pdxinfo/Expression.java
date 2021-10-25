@@ -11,13 +11,10 @@ package org.jax.mgi.mtb.pdxinfo;
  */
 public class Expression {
     
-    private static final String[] columns = {"model_id","sample_id","sample_origin","host_strain_nomenclature","passage","chromosome","strand","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","ensembl_transcript_id","rnaseq_coverage","rnaseq_fpkm","rnaseq_tpm","rnaseq_count","affy_hgea_probe_id","affy_hgea_expression_value","illumina_hgea_probe_id","illumina_hgea_expression_value","z_score","genome_assembly","platform"};
+    private static final String[] columns = {"sample_id","chromosome","strand","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","ensembl_transcript_id","rnaseq_coverage","rnaseq_fpkm","rnaseq_tpm","rnaseq_count","affy_hgea_probe_id","affy_hgea_expression_value","illumina_hgea_probe_id","illumina_hgea_expression_value","z_score","genome_assembly","platform"};
     
-    private String model_id;
+   
     private String sample_id;
-    private String sample_origin;
-    private String host_strain_nomenclature;
-    private String passage;
     private String chromosome;
     private String strand;
     private String seq_start_position;
@@ -51,11 +48,9 @@ public class Expression {
     }
 
     public String toString(String del){
-       return this.getModel_id()+del+
+       return 
                this.getSample_id()+del+
-               this.getSample_origin()+del+
-               this.getHost_strain_nomenclature()+del+
-               this.getPassage()+del+
+               
                this.getChromosome()+del+
                this.getStrand()+del+
                this.getSeq_start_position()+del+
@@ -78,19 +73,7 @@ public class Expression {
                this.getPlatform();
     }
 
-    /**
-     * @return the model_id
-     */
-    public String getModel_id() {
-        return model_id;
-    }
-
-    /**
-     * @param model_id the model_id to set
-     */
-    public void setModel_id(String model_id) {
-        this.model_id = model_id;
-    }
+   
 
     /**
      * @return the sample_id
@@ -104,48 +87,6 @@ public class Expression {
      */
     public void setSample_id(String sample_id) {
         this.sample_id = sample_id;
-    }
-
-    /**
-     * @return the sample_origin
-     */
-    public String getSample_origin() {
-        return sample_origin;
-    }
-
-    /**
-     * @param sample_origin the sample_origin to set
-     */
-    public void setSample_origin(String sample_origin) {
-        this.sample_origin = sample_origin;
-    }
-
-    /**
-     * @return the host_strain_nomenclature
-     */
-    public String getHost_strain_nomenclature() {
-        return host_strain_nomenclature;
-    }
-
-    /**
-     * @param host_strain_nomenclature the host_strain_nomenclature to set
-     */
-    public void setHost_strain_nomenclature(String host_strain_nomenclature) {
-        this.host_strain_nomenclature = host_strain_nomenclature;
-    }
-
-    /**
-     * @return the passage
-     */
-    public String getPassage() {
-        return passage;
-    }
-
-    /**
-     * @param passage the passage to set
-     */
-    public void setPassage(String passage) {
-        this.passage = passage;
     }
 
     /**

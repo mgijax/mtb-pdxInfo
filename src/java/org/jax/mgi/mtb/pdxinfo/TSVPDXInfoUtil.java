@@ -229,11 +229,11 @@ public class TSVPDXInfoUtil {
                     if (!"Whole Exome".equals(getField(array.getJSONObject(i), "platform")) || includeWholeExome) {
 
                         Mutation mute = new Mutation();
-                        mute.setModel_id(getField(array.getJSONObject(i), "model_name"));
+                  //      mute.setModel_id(getField(array.getJSONObject(i), "model_name"));
                         mute.setSample_id(getField(array.getJSONObject(i), "sample_name"));
-                        mute.setSample_origin("xenograft"); // verify we don't have any PT data for public comsumption
-                        mute.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
-                        mute.setPassage(getPassage(getField(array.getJSONObject(i), "passage_num")));
+                  //      mute.setSample_origin("xenograft"); // verify we don't have any PT data for public comsumption
+                   //     mute.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+                  //      mute.setPassage(getPassage(getField(array.getJSONObject(i), "passage_num")));
                         mute.setSymbol(getField(array.getJSONObject(i), "gene_symbol"));
                         mute.setBiotype("");
                         mute.setCoding_sequence_change("");
@@ -297,11 +297,11 @@ public class TSVPDXInfoUtil {
                 CNA cna = new CNA();
                 JSONObject row = result.getJSONObject(i);
      
-                cna.setModel_id(row.getString("model_name"));
+              //  cna.setModel_id(row.getString("model_name"));
                 cna.setSample_id(row.getString("sample_name"));
-                cna.setSample_origin("xenograft");
-                cna.setPassage(getPassage(row.getString("passage_num")));
-                cna.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+              //  cna.setSample_origin("xenograft");
+             //   cna.setPassage(getPassage(row.getString("passage_num")));
+             //   cna.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
                 cna.setChromosome(row.getString("chromosome"));
                 cna.setSeq_start_position(row.getString("gene_start_bp"));
                 cna.setSeq_end_position(row.getString("gene_end_bp"));
@@ -369,11 +369,11 @@ public class TSVPDXInfoUtil {
                 Expression expr = new Expression();
                 JSONObject row = result.getJSONObject(i);
      
-                expr.setModel_id(row.getString("model_name"));
+           //     expr.setModel_id(row.getString("model_name"));
                 expr.setSample_id(row.getString("sample_name"));
-                expr.setSample_origin("xenograft");
-                expr.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
-                expr.setPassage(getPassage(row.getString("passage_num")));
+           //     expr.setSample_origin("xenograft");
+           //     expr.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
+            //    expr.setPassage(getPassage(row.getString("passage_num")));
                 expr.setChromosome("");
                 expr.setStrand("");
                 expr.setSeq_start_position("");
@@ -609,9 +609,7 @@ public class TSVPDXInfoUtil {
             
             loadCytogenetics();
             
-            variationModels = loadModelsWithVariationData();
-            cnaModels = loadModelsWithCNAData();
-            expModels = loadModelsWithEXPData();
+            loadModelsWithData();
           
             
             
@@ -700,78 +698,63 @@ public class TSVPDXInfoUtil {
     }
     
     
-    private String loadModelsWithVariationData(){
+   
+    private void loadModelsWithData(){
         
-        StringBuilder modelIDs = new StringBuilder();
-        
-        for(Model m : modelCache){
-            try{
-             String params = "?keepnulls=yes&model=" + m.getModelId() + "&limit=5&filter=yes";
-             JSONObject job = new JSONObject(getJSON(VARIANT_URL + params, null));
-             log.info("checking for variation data for "+m.getModelId());
-                if(job.has("total_rows")){
-                    int total = (Integer) job.get("total_rows");
-                    if(total >0){
-                        modelIDs.append(m.getModelId()).append("\n");
+         HashMap<String,String> varDeDupe = new HashMap();
+         HashMap<String,String> expDeDupe = new HashMap();
+         HashMap<String,String> cnvDeDupe = new HashMap();
+         String headers = "model_id\tsample_id\tsample_origin\tpassage\thost_strain_nomenclature\tplatform\n";
+        String url ="http://pdxdata.jax.org/api/inventory?reqitems=mart_table,model_name,sample_name,passage_num,rowcount,platform&filter=yes";
+        try{
+            JSONObject job1 = new JSONObject(getJSON(url));
+            JSONArray jarray = job1.getJSONArray("data");
+            for(int i = 0; i < jarray.length(); i++){
+                JSONObject job = jarray.getJSONObject(i);
+                
+                String sample = job.getString("sample_name");
+                String model = job.getString("model_name");
+                String table = job.getString("mart_table");
+                String platform = job.getString("platform");
+                String passage =  getPassage(job.getString("passage_num"));
+                String count = job.getString("rowcount");
+                String row = model+"\t"+sample+"\txenograft\t"+passage+"\t"+NSG_OFFICIAL_NAME+"\t"+platform;
+                if(!"0".equals(count)){
+                    if(table.contains("cnv")){
+                        cnvDeDupe.put(row,row);
+                    }else if (table.contains("expression")){
+                        expDeDupe.put(row,row);
+                    }else if(table.contains("variation")){
+                        varDeDupe.put(row, row);
                     }
                 }
-                
-            }catch(Exception e){
-                log.error("Unable to check for variation data for model "+m.getModelId(),e);
+                        
             }
+            StringBuilder sb = new StringBuilder();
+            sb.append(headers);
+            for(String row : cnvDeDupe.keySet()){
+                sb.append(row).append("\n");
+            }
+            cnaModels = sb.toString();
+            
+            sb = new StringBuilder();
+            sb.append(headers);
+            for(String row : varDeDupe.keySet()){
+                sb.append(row).append("\n");
+            }
+            variationModels = sb.toString();
+            
+            sb = new StringBuilder();
+            sb.append(headers);
+            for(String row : expDeDupe.keySet()){
+                sb.append(row).append("\n");
+            }
+            expModels = sb.toString();
+                    
+        }catch(Exception e){
+           log.error(e);
         }
         
-        return modelIDs.toString();
-    }
-    
-    
-    private String loadModelsWithCNAData(){
-        
-        StringBuilder modelIDs = new StringBuilder();
-        
-        for(Model m : modelCache){
-            try{
-             String params =  m.getModelId() + "&limit=5";
-             JSONObject job = new JSONObject(getJSON(CNA_URL + params, null));
-             log.info("checking for cna data for "+m.getModelId());
-                if(job.has("count")){
-                    int total = (Integer) job.get("count");
-                    if(total >0){
-                        modelIDs.append(m.getModelId()).append("\n");
-                    }
-                }
-                
-            }catch(Exception e){
-                log.error("Unable to check for CNA data for model "+m.getModelId(),e);
-            }
-        }
-        
-        return modelIDs.toString();
-    }
-    
-    
-     private String loadModelsWithEXPData(){
-        
-        StringBuilder modelIDs = new StringBuilder();
-        
-        for(Model m : modelCache){
-            try{
-             String params =  m.getModelId() + "&limit=5";
-             JSONObject job = new JSONObject(getJSON(EXP_URL + params, null));
-             log.info("checking for Expression data for "+m.getModelId());
-                if(job.has("count")){
-                    int total = (Integer) job.get("count");
-                    if(total >0){
-                        modelIDs.append(m.getModelId()).append("\n");
-                    }
-                }
-                
-            }catch(Exception e){
-                log.error("Unable to check for expression data for model "+m.getModelId(),e);
-            }
-        }
-        
-        return modelIDs.toString();
     }
     
     
@@ -870,10 +853,10 @@ public class TSVPDXInfoUtil {
                 Integer i = new Integer(p);
                 passage = i.toString();
             }catch(NumberFormatException nfe){
-                log.error("Passage "+p+" is not an integer!",nfe);
+                log.error("Passage "+p+" is not an integer! Passage set to 1.");
             }
         }catch(NullPointerException npe){
-            log.error("Passage is null",npe);
+            log.error("Passage is null, will be set to 1");
         }
         return passage;
     }

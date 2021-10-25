@@ -11,11 +11,8 @@ package org.jax.mgi.mtb.pdxinfo;
  */
 public class Mutation {
 
-    static String[] columns = {"model_id",
+    static String[] columns = {
         "sample_id",
-        "sample_origin",
-        "host_strain_nomenclature",
-        "passage",
         "symbol",
         "biotype",
         "coding_sequence_change",
@@ -39,11 +36,8 @@ public class Mutation {
         "genome_assembly",
         "platform"};
 
-    private String model_id = "";
+   
     private String sample_id = "";
-    private String sample_origin = "";
-    private String host_strain_nomenclature = "";
-    private String passage = "";
     private String symbol = "";
     private String biotype = "";
     private String coding_sequence_change = "";
@@ -67,20 +61,7 @@ public class Mutation {
     private String genome_assembly = "";
     private String platform = "";
 
-    /**
-     * @return the model_id
-     */
-    public String getModel_id() {
-        return model_id;
-    }
-
-    /**
-     * @param model_id the model_id to set
-     */
-    public void setModel_id(String model_id) {
-        this.model_id = model_id;
-    }
-
+   
     /**
      * @return the sample_id
      */
@@ -93,48 +74,6 @@ public class Mutation {
      */
     public void setSample_id(String sample_id) {
         this.sample_id = sample_id;
-    }
-
-    /**
-     * @return the sample_origin
-     */
-    public String getSample_origin() {
-        return sample_origin;
-    }
-
-    /**
-     * @param sample_origin the sample_origin to set
-     */
-    public void setSample_origin(String sample_origin) {
-        this.sample_origin = sample_origin;
-    }
-
-    /**
-     * @return the host_strain_nomenclature
-     */
-    public String getHost_strain_nomenclature() {
-        return host_strain_nomenclature;
-    }
-
-    /**
-     * @param host_strain_nomenclature the host_strain_nomenclature to set
-     */
-    public void setHost_strain_nomenclature(String host_strain_nomenclature) {
-        this.host_strain_nomenclature = host_strain_nomenclature;
-    }
-
-    /**
-     * @return the passage
-     */
-    public String getPassage() {
-        return passage;
-    }
-
-    /**
-     * @param passage the passage to set
-     */
-    public void setPassage(String passage) {
-        this.passage = passage;
     }
 
     /**
@@ -458,11 +397,8 @@ public class Mutation {
     }
 
     public String toString(String delim) {
-        return this.model_id + delim
-                + this.sample_id + delim
-                + this.sample_origin + delim
-                + this.host_strain_nomenclature + delim
-                + this.passage + delim
+        return 
+                 this.sample_id + delim       
                 + this.symbol + delim
                 + this.biotype + delim
                 + this.coding_sequence_change + delim

@@ -12,15 +12,12 @@ package org.jax.mgi.mtb.pdxinfo;
 public class CNA {
     
     
-    private static final String[] columns = {"model_id","sample_id","sample_origin","passage","host_strain_nomenclature","chromosome","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","log10r_cna","log2r_cna","fold_change","copy_number_status","gistic_value","picnic_value","genome_assembly","platform"};
+    private static final String[] columns = {"sample_id","chromosome","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","log10r_cna","log2r_cna","fold_change","copy_number_status","gistic_value","picnic_value","genome_assembly","platform"};
 
    
 
-    private String model_id;
+    
     private String sample_id;
-    private String sample_origin;
-    private String passage;
-    private String host_strain_nomenclature;
     private String chromosome;
     private String seq_start_position;
     private String seq_end_position;
@@ -39,19 +36,7 @@ public class CNA {
     
     
 
-    /**
-     * @return the model_id
-     */
-    public String getModel_id() {
-        return model_id;
-    }
-
-    /**
-     * @param model_id the model_id to set
-     */
-    public void setModel_id(String model_id) {
-        this.model_id = model_id;
-    }
+   
 
     /**
      * @return the sample_id
@@ -65,48 +50,6 @@ public class CNA {
      */
     public void setSample_id(String sample_id) {
         this.sample_id = sample_id;
-    }
-
-    /**
-     * @return the sample_origin
-     */
-    public String getSample_origin() {
-        return sample_origin;
-    }
-
-    /**
-     * @param sample_origin the sample_origin to set
-     */
-    public void setSample_origin(String sample_origin) {
-        this.sample_origin = sample_origin;
-    }
-
-    /**
-     * @return the passage
-     */
-    public String getPassage() {
-        return passage;
-    }
-
-    /**
-     * @param passage the passage to set
-     */
-    public void setPassage(String passage) {
-        this.passage = passage;
-    }
-
-    /**
-     * @return the host_strain_nomenclature
-     */
-    public String getHost_strain_nomenclature() {
-        return host_strain_nomenclature;
-    }
-
-    /**
-     * @param host_strain_nomenclature the host_strain_nomenclature to set
-     */
-    public void setHost_strain_nomenclature(String host_strain_nomenclature) {
-        this.host_strain_nomenclature = host_strain_nomenclature;
     }
 
     /**
@@ -329,11 +272,8 @@ public class CNA {
     }
 
     public String toString(String del){
-       return this.model_id+del+
+       return 
                 this.sample_id+del+
-                this.sample_origin+del+
-                this.passage+del+
-                this.host_strain_nomenclature+del+
                 this.chromosome+del+
                 this.seq_start_position+del+
                 this.seq_end_position+del+
