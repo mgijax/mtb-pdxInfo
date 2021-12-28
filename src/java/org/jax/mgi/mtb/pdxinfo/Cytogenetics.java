@@ -11,13 +11,9 @@ package org.jax.mgi.mtb.pdxinfo;
  */
 public class Cytogenetics {
 
-    static final String[] columns = {"sample_id", "sample_origin", "passage", "host_strain_nomenclature", "model_id", "marker_name", "marker_status", "essential_or_additional_marker", "technique_name", "protocol_file_name", "result_file_name"};
+    static final String[] columns = {"sample_id", "marker_name", "marker_status", "essential_or_additional_marker", "technique_name", "protocol_file_name", "result_file_name"};
 
     private String sample_id;
-    private String sample_origin;
-    private String passage;
-    private String host_strain_nomenclature;
-    private String model_id;
     private String marker_name;
     private String marker_status;
     private String essential_or_additional_marker;
@@ -41,62 +37,6 @@ public class Cytogenetics {
      */
     public void setSample_id(String sample_id) {
         this.sample_id = sample_id;
-    }
-
-    /**
-     * @return the sample_origin
-     */
-    public String getSample_origin() {
-        return sample_origin;
-    }
-
-    /**
-     * @param sample_origin the sample_origin to set
-     */
-    public void setSample_origin(String sample_origin) {
-        this.sample_origin = sample_origin;
-    }
-
-    /**
-     * @return the passage
-     */
-    public String getPassage() {
-        return passage;
-    }
-
-    /**
-     * @param passage the passage to set
-     */
-    public void setPassage(String passage) {
-        this.passage = passage;
-    }
-
-    /**
-     * @return the host_strain_nomenclature
-     */
-    public String getHost_strain_nomenclature() {
-        return host_strain_nomenclature;
-    }
-
-    /**
-     * @param host_strain_nomenclature the host_strain_nomenclature to set
-     */
-    public void setHost_strain_nomenclature(String host_strain_nomenclature) {
-        this.host_strain_nomenclature = host_strain_nomenclature;
-    }
-
-    /**
-     * @return the model_id
-     */
-    public String getModel_id() {
-        return model_id;
-    }
-
-    /**
-     * @param model_id the model_id to set
-     */
-    public void setModel_id(String model_id) {
-        this.model_id = model_id;
     }
 
     /**
@@ -195,10 +135,6 @@ public class Cytogenetics {
 
     public String toString(String del) {
         return this.sample_id + del
-                + this.sample_origin + del
-                + this.passage + del
-                + this.host_strain_nomenclature + del
-                + this.model_id + del
                 + this.marker_name + del
                 + this.marker_status + del
                 + this.essential_or_additional_marker + del

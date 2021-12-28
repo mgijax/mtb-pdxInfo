@@ -12,7 +12,7 @@ package org.jax.mgi.mtb.pdxinfo;
 public class CNA {
     
     
-    private static final String[] columns = {"sample_id","chromosome","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","log10r_cna","log2r_cna","fold_change","copy_number_status","gistic_value","picnic_value","genome_assembly","platform"};
+    private static final String[] columns = {"sample_id","chromosome","strand","seq_start_position","seq_end_position","symbol","ucsc_gene_id","ncbi_gene_id","ensembl_gene_id","log10r_cna","log2r_cna","fold_change","copy_number_status","gistic_value","picnic_value","genome_assembly","platform_id"};
 
    
 
@@ -275,6 +275,7 @@ public class CNA {
        return 
                 this.sample_id+del+
                 this.chromosome+del+
+                del+ // strand 
                 this.seq_start_position+del+
                 this.seq_end_position+del+
                 this.symbol+del+

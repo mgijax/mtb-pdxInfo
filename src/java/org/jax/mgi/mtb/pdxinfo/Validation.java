@@ -16,7 +16,7 @@ public class Validation {
         private String passagesTested;
         private String validationHostStrainFull;
 
-        public static final String[] columns = {"model_id","validation_technique","description","passages_tested","validation_host_strain_full"};
+        public static final String[] columns = {"model_id","validation_technique","description","passages_tested","validation_host_strain_nomenclature"};
     /**
      * @return the modelId
      */

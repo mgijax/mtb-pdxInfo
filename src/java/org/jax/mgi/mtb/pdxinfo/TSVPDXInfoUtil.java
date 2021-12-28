@@ -50,7 +50,8 @@ public class TSVPDXInfoUtil {
 
     
 
-    private static final String GRAPHIC_URL = "http://tumor.informatics.jax.org/mtbwi/pdxDetailsTabs.do?tab=graphicDetails&contentKey=";
+ //   private static final String GRAPHIC_URL = "http://tumor.informatics.jax.org/mtbwi/pdxDetailsTabs.do?tab=graphicDetails&contentKey=";
+    private static final String GRAPHIC_URL = "http://tumor.informatics.jax.org/usrlocalmgi/mtb/live/www/pdxData/uploads/";
 
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ";
     
@@ -68,6 +69,8 @@ public class TSVPDXInfoUtil {
 
     private static final String ASSEMBLY_38 = "GRCh38";
     
+    private static final String DELIM = "\t";
+    
     private final static Logger log
             = Logger.getLogger(TSVPDXInfoUtil.class.getName());
     
@@ -81,10 +84,11 @@ public class TSVPDXInfoUtil {
     private static ArrayList<Model> modelCache = new ArrayList();
     private static ArrayList<Validation> validationCache = new ArrayList();
     private static ArrayList<Sharing> sharingCache = new ArrayList();
-    private static ArrayList<Cytogenetics> cytoCache = new ArrayList();
+    private static HashMap<String,ArrayList<Cytogenetics>> cytoCache = new HashMap<>();
     private static String variationModels = "";
     private static String cnaModels = "";
     private static String expModels = "";
+    private static String cytoModels = "";
     
     public static void main(String[] args){
         TSVPDXInfoUtil util = new TSVPDXInfoUtil();
@@ -120,7 +124,7 @@ public class TSVPDXInfoUtil {
     public String getPatients(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Patient.columns)).append("\n");
+        sb.append(String.join(DELIM,Patient.columns)).append("\n");
         for(Patient p : patientCache){
             sb.append(p.toString()).append("\n");
         }
@@ -130,7 +134,7 @@ public class TSVPDXInfoUtil {
     public String getSamples(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Sample.columns)).append("\n");
+        sb.append(String.join(DELIM,Sample.columns)).append("\n");
         for(Sample s : sampleCache){
             sb.append(s.toString()).append("\n");
         }
@@ -140,7 +144,7 @@ public class TSVPDXInfoUtil {
     public String getModels(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Model.columns)).append("\n");
+        sb.append(String.join(DELIM,Model.columns)).append("\n");
         for(Model m : modelCache){
             sb.append(m.toString()).append("\n");
         }
@@ -150,7 +154,7 @@ public class TSVPDXInfoUtil {
     public String getValidations(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Validation.columns)).append("\n");
+        sb.append(String.join(DELIM,Validation.columns)).append("\n");
         for(Validation v : validationCache){
             sb.append(v.toString()).append("\n");
         }
@@ -160,21 +164,28 @@ public class TSVPDXInfoUtil {
     public String getSharing(){
         checkInitialized();
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Sharing.columns)).append("\n");
+        sb.append(String.join(DELIM,Sharing.columns)).append("\n");
         for(Sharing s : sharingCache){
             sb.append(s.toString()).append("\n");
         }
         return sb.toString();
     }
     
-    public String getCytogenetics(){
+    public String getCytogenetics(String model){
         checkInitialized();
+        ArrayList<Cytogenetics> cytos = cytoCache.get(model);
         StringBuilder sb = new StringBuilder();
-        sb.append(String.join("\t",Cytogenetics.columns)).append("\n");
-        for(Cytogenetics c : cytoCache){
+        sb.append(String.join(DELIM,Cytogenetics.columns)).append("\n");
+        for(Cytogenetics c : cytos){
             sb.append(c.toString()).append("\n");
         }
         return sb.toString();
+    }
+    
+    public String getModelsWithCytogenetics(){
+        checkInitialized();
+        return cytoModels;
+        
     }
     
     public String getModelsWithVariationData(){
@@ -286,7 +297,7 @@ public class TSVPDXInfoUtil {
      
      public String getCNA(String modelID){
          
-         StringBuilder sb = new StringBuilder(CNA.getColumnHeaders("\t")).append("\n");
+         StringBuilder sb = new StringBuilder(CNA.getColumnHeaders(""+DELIM+"")).append("\n");
          
      
           try{
@@ -330,7 +341,7 @@ public class TSVPDXInfoUtil {
      
       public String getExpression(String modelID){
          
-         StringBuilder sb = new StringBuilder(Expression.getColumnHeaders("\t")).append("\n");
+         StringBuilder sb = new StringBuilder(Expression.getColumnHeaders(""+DELIM+"")).append("\n");
          
      
           try{
@@ -587,11 +598,8 @@ public class TSVPDXInfoUtil {
                             sharon.setAccessibility("Academia and Industry");
                             sharon.setDatabaseUrl("http://tumor.informatics.jax.org/mtbwi/pdxDetails.do?modelID="+id);
                             sharon.setFormUrl("http://tumor.informatics.jax.org/mtbwi/pdxRequest.do?mice="+id);
-                            sharon.setProject("JAX PDX");
-                            sharon.setProviderName("The Jackson Laboratory");
-                            sharon.setProviderAbbreviation("JAX");
-                            sharon.setProviderType("Academia");
-                            sharon.setEropdx_accessibility_modlaity("Not Applicable");
+                           
+                            sharon.setEropdx_accessibility_modality("Not Applicable");
                             sharon.setEmail("micetech@jax.org");
                             sharon.setName("micetech");
 
@@ -627,31 +635,28 @@ public class TSVPDXInfoUtil {
     
     
     private void loadCytogenetics(){
+        
+        
+        String modelsWithHeaders = "model_id"+DELIM+"sample_id"+DELIM+"sample_origin"+DELIM+"passage"+DELIM+"host_strain_nomenclature"+DELIM+"platform_id\n";
+        StringBuilder cytos = new StringBuilder();
+        cytos.append(modelsWithHeaders).append("\n");
+        
+        StringBuilder cytoModel;
+        HashMap<String,String> deDupe = new HashMap<>();
         PDXDAO dao = getPDXDAO();
         
         ArrayList<PDXGraphic> histologyImages = dao.getHistologyImages();
         
         for(PDXGraphic graphic: histologyImages){
         
+            cytoModel = new StringBuilder();
             Cytogenetics cyto = new Cytogenetics();
             
-//            private String sample_id;
-//            private String sample_origin;
-//            private String passage;
-//            private String host_strain_nomenclature;
-//            private String model_id;
-//            private String marker_name;
-//            private String marker_status;
-//            private String essential_or_additional_marker;
-//            private String technique_name;
-//            private String protocol_file_name;
-//            private String result_file_name;
-//        
-
             String sample = NOT_SPECIFIED;
             String origin = "xenograft";
             String passage = NOT_SPECIFIED;
             String stain = NOT_SPECIFIED;
+            String modelID = graphic.getModelID();
             if(graphic.getDescription().split(" ") != null){
                 String[] desc = graphic.getDescription().split(" ");
                 
@@ -673,28 +678,36 @@ public class TSVPDXInfoUtil {
 
                 }
                 
-//                System.out.println(graphic.getDescription());
-//                System.out.println("\t"+sample);
-//                System.out.println("\t"+origin);
-//                System.out.println("\t"+passage);
-//                System.out.println("\t"+stain);
+
             }
+            cytoModel.append(modelID).append(DELIM);
+            cytoModel.append(sample).append(DELIM);
+            cytoModel.append(origin).append(DELIM);
+            cytoModel.append(passage).append(DELIM);
+            cytoModel.append(NSG_OFFICIAL_NAME).append(DELIM);
+            cytoModel.append(NOT_SPECIFIED);
+            deDupe.put(cytoModel.toString(), cytoModel.toString());
 
             cyto.setSample_id(sample);
-            cyto.setSample_origin(origin);
-            cyto.setPassage(getPassage(passage));
-            cyto.setHost_strain_nomenclature(NSG_OFFICIAL_NAME);
-            cyto.setModel_id(graphic.getModelID());
             cyto.setMarker_name("");
             cyto.setMarker_status("");
             cyto.setEssential_or_additional_marker("");
             cyto.setTechnique_name("");
             cyto.setProtocol_file_name("");
             cyto.setResult_file_name(GRAPHIC_URL+graphic.getFileName());
-            
-            cytoCache.add(cyto);
-                    
+            if(cytoCache.containsKey(modelID)){
+                cytoCache.get(modelID).add(cyto);
+            }else{
+                ArrayList<Cytogenetics> cytoList = new ArrayList<>();
+                cytoList.add(cyto);
+                cytoCache.put(modelID,cytoList);
+            }
         }
+        
+        for(String cyto : deDupe.keySet()){
+            cytos.append(cyto).append("\n");
+        }
+        cytoModels = cytos.toString();
     }
     
     
@@ -704,7 +717,7 @@ public class TSVPDXInfoUtil {
          HashMap<String,String> varDeDupe = new HashMap();
          HashMap<String,String> expDeDupe = new HashMap();
          HashMap<String,String> cnvDeDupe = new HashMap();
-         String headers = "model_id\tsample_id\tsample_origin\tpassage\thost_strain_nomenclature\tplatform\n";
+         String headers = "model_id"+DELIM+"sample_id"+DELIM+"sample_origin"+DELIM+"passage"+DELIM+"host_strain_nomenclature"+DELIM+"platform_id\n";
         String url ="http://pdxdata.jax.org/api/inventory?reqitems=mart_table,model_name,sample_name,passage_num,rowcount,platform&filter=yes";
         try{
             JSONObject job1 = new JSONObject(getJSON(url));
@@ -718,7 +731,7 @@ public class TSVPDXInfoUtil {
                 String platform = job.getString("platform");
                 String passage =  getPassage(job.getString("passage_num"));
                 String count = job.getString("rowcount");
-                String row = model+"\t"+sample+"\txenograft\t"+passage+"\t"+NSG_OFFICIAL_NAME+"\t"+platform;
+                String row = model+""+DELIM+""+sample+""+DELIM+"xenograft"+DELIM+""+passage+""+DELIM+""+NSG_OFFICIAL_NAME+""+DELIM+""+platform;
                 if(!"0".equals(count)){
                     if(table.contains("cnv")){
                         cnvDeDupe.put(row,row);

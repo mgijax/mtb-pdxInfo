@@ -20,7 +20,7 @@ public class Model {
     private String passage;
     private String publications;
 
-    public static final String[] columns = {"model_id","host_strain","host_strain_full","engraftment_site","engraftment_type","sample_type","sample_state","passage_number","publications"};
+    public static final String[] columns = {"model_id","host_strain_name","host_strain_nomenclature","engraftment_site","engraftment_type","sample_type","sample_state","passage_number","publications"};
     
     /**
      * @return the modelId

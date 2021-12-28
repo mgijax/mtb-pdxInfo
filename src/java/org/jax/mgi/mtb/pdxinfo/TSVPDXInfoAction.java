@@ -44,11 +44,11 @@ public class TSVPDXInfoAction extends Action {
             response.getWriter().write(util.getPatients());
         }
         
-        else if(request.getParameter("sample")!=null){
+        else if(request.getParameter("patient_sample")!=null){
             response.getWriter().write(util.getSamples());
         }
         
-        else if(request.getParameter("model")!=null){
+        else if(request.getParameter("pdx_model")!=null){
             response.getWriter().write(util.getModels());
         }
         
@@ -85,8 +85,13 @@ public class TSVPDXInfoAction extends Action {
         }
         
         else if(request.getParameter("cytogenetics")!=null){
-             
-            response.getWriter().write(util.getCytogenetics());
+              modelID = request.getParameter("cytogenetics");
+            response.getWriter().write(util.getCytogenetics(modelID));
+        }
+        
+        else if(request.getParameter("modelsWithCytogenetics")!=null){
+              
+            response.getWriter().write(util.getModelsWithCytogenetics());
         }
         
         

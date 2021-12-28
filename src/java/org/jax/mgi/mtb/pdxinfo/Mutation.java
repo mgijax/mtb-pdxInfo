@@ -34,7 +34,7 @@ public class Mutation {
         "ensembl_transcript_id",
         "variation_id",
         "genome_assembly",
-        "platform"};
+        "platform_id"};
 
    
     private String sample_id = "";

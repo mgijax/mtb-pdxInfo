@@ -149,7 +149,7 @@ public class PDXInfoUtil {
                 result.append("\"passage\":\"").append(data.getString("passage_num")).append("\",");
                 result.append("\"gene\":\"").append(data.getString("gene_symbol")).append("\",");
                 result.append("\"logratio_ploidy\":\"").append(data.getDouble("logratio_ploidy")).append("\",");
-                result.append("\"platform\":\"").append(data.getString("platform")).append("\"},");
+                result.append("\"platform_id\":\"").append(data.getString("platform")).append("\"},");
 
             }
             result.replace(result.length()-1, result.length(), "]}");
@@ -189,7 +189,7 @@ public class PDXInfoUtil {
                     // means model is from DFCI or Baylor won't have a value
                     result.append("\"TPM\":\"").append(data.getDouble("tpm")).append("\",");
                 }
-                result.append("\"platform\":\"").append(data.getString("platform")).append("\"},");
+                result.append("\"platform_id\":\"").append(data.getString("platform")).append("\"},");
 
             }
             result.replace(result.length()-1, result.length(), "]}");
@@ -251,7 +251,7 @@ public class PDXInfoUtil {
                         result.append("{\"model id\":\"").append(getField(array.getJSONObject(i), "model_id")).append("\",");
                         result.append("\"sample\":\"").append(getField(array.getJSONObject(i), "sample_name")).append("\",");
                         result.append("\"gene symbol\":\"").append(getField(array.getJSONObject(i), "gene_symbol")).append("\",");
-                        result.append("\"platform\":\"").append(getField(array.getJSONObject(i), "platform")).append("\",");
+                        result.append("\"platform_id\":\"").append(getField(array.getJSONObject(i), "platform")).append("\",");
                         result.append("\"genome assembly\":\"GRCh38\",");
                         result.append("\"chromosome\":\"").append(getField(array.getJSONObject(i), "chromosome")).append("\",");
                         result.append("\"seq position\":\"").append(getField(array.getJSONObject(i), "seq_position")).append("\",");

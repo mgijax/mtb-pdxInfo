@@ -31,7 +31,7 @@ public class Sample {
     private String priorTreatment; 
     private String modelID;
     
-    public static final String[] columns = {"patient_id","sample_id","collection_date","collection_event","months_since_collection_1","age_in_years_at_collection","diagnosis","tumour_type","primary_site","collection_site","stage","staging_system","grade","grading_system","virology_status","sharable","treatment_naive_at_collection","treated","prior_treatment","model_id"};
+    public static final String[] columns = {"patient_id","sample_id","collection_date","collection_event","months_since_collection_1","age_in_years_at_collection","diagnosis","tumour_type","primary_site","collection_site","stage","staging_system","grade","grading_system","virology_status","sharable","treatment_naive_at_collection","treated_at_collection","treated_prior_to_collection","model_id"};
 
     /**
      * @return the patientID
