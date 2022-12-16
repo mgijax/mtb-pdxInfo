@@ -20,7 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+
 //import org.apache.axiom.soap.SOAP11Constants;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
@@ -56,7 +57,7 @@ public class PDXInfoUtil {
     private static final String NSG_OFFICIAL_NAME = "NOD.Cg-Prkdcscid Il2rgtm1Wjl/SzJ";
     
     private final static Logger log
-            = Logger.getLogger(PDXInfoUtil.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(PDXInfoUtil.class.getName());
     
     public static void main(String[] args){
         PDXInfoUtil util = new PDXInfoUtil();

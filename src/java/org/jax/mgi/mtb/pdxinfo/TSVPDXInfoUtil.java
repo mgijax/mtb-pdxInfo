@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 import org.jax.mgi.mtb.dao.custom.mtb.pdx.PDXContent;
@@ -72,7 +72,7 @@ public class TSVPDXInfoUtil {
     private static final String DELIM = "\t";
     
     private final static Logger log
-            = Logger.getLogger(TSVPDXInfoUtil.class.getName());
+            = org.apache.logging.log4j.LogManager.getLogger(TSVPDXInfoUtil.class.getName());
     
     HashMap<String, String> modelPatients = new HashMap();
     HashMap<String, ArrayList<String>> modelClincalDetails = new HashMap<String, ArrayList<String>>();
@@ -460,7 +460,28 @@ public class TSVPDXInfoUtil {
             if (result.length > 0) {
                
                 for (int i = 0; i < result.length; i++) {
+                    
+                    //for cache post elims
+                    System.out.println("ID\tStatus\tGender\tEth\tInitialDiag\tAge\tCollDate\tSpecSite\tGrades\tStage\tPrimarySite\tTType\tEngraftmentSite\tSampleType");
+                    System.out.println(result[i].getIdentifier()+"\t"+
+                        result[i].getModel_Status()+"\t"+
+                        result[i].getGender()+"\t"+
+                        result[i].getEthnicity()+"\t"+
+                        result[i].getInitial_Diagnosis()+"\t"+
+                        result[i].getPatient_Age()+"\t"+
 
+                     result[i].getCollection_Date()+"\t"+
+
+                     result[i].getSpecimen_Site()+"\t"+
+                     result[i].getGrades()+"\t"+
+                     result[i].getTumor_Stage()+"\t"+
+                     result[i].getPrimary_Site()+"\t"+
+                    result[i].getTumor_Type()+"\t"+
+                    result[i].getEngraftmentSite()+"\t"+
+                    result[i].getSample_Type());
+                    
+                    
+                    
                    String id = result[i].getIdentifier();
                    String patientID = modelPatients.get(id);
                     try {

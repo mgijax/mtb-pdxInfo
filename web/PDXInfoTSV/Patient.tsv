@@ -1,0 +1,418 @@
+patient_id	sex	history	ethnicity	ethnicity_assessment_method	initial_diagnosis	age_at_initial_diagnosis
+P20140001391	Male	Not Specified	Not Reported	Self reported	glioblastoma	13
+P20140000060	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	50
+P20140000181	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	57
+P20140000061	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	56
+P20140000182	Female	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	54
+P20140001151	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	47
+P20140000062	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	60
+P20140000183	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	57
+P20140000063	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	73
+P20140000184	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	68
+P20140001153	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	51
+P20180002001	Female	Not Specified	Not Hispanic or Latino	Self reported	non-small cell lung carcinoma	74
+P20140000064	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	61
+P20140000185	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	66
+P20140001031	Male	Not Specified	Not Reported	Self reported	pancreas adenocarcinoma	
+P20140000065	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	73
+P20140000186	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	67
+P20140001034	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	53
+P20140001155	Male	Not Specified	Not Reported	Self reported	colon carcinoma	70
+P20150001786	Male	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	24
+P20140000057	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	54
+P20140001266	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	58
+P20140000058	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	52
+P20140001148	Male	Not Specified	Not Reported	Self reported	melanoma	70
+P20150001663	Male	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	2
+P20140001147	Female	Not Specified	Not Reported	Self reported	colon carcinoma	78
+P20150001664	Female	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	6
+P20160001825	Female	Not Specified	Not Hispanic or Latino	Self reported	squamous cell carcinoma	73
+P20150001667	Female	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	80
+P20140000070	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	42
+P20140000191	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	59
+P20140001160	Male	Not Specified	Not Reported	Self reported	renal cell carcinoma	63
+P20140001281	Male	Not Specified	Hispanic	Self reported	lung adenocarcinoma	51
+P20140000192	Female	Not Specified	Not Reported	Self reported	lung small cell carcinoma	60
+P20140000072	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	50
+P20140000073	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	70
+P20140000194	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	77
+P20140001161	Male	Not Specified	Not Reported	Self reported	renal cell carcinoma	63
+P20140001043	Male	Not Specified	Hispanic	Self reported	cholangiocarcinoma	79
+P20180002012	Female	Not Specified	Not Hispanic or Latino	Self reported	endometrial cancer	74
+P20140000075	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	53
+P20140000196	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	69
+P20140001163	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	48
+P20140000076	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	62
+P20140000197	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	44
+P20140001166	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	63
+P20180002010	Female	Not Specified	Not Hispanic or Latino	Self reported	uterine cancer	47
+P20140000077	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	57
+P20150001660	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	55
+P20140000190	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	57
+1	Female	Not Specified	Not Hispanic or Latino	Self reported	sarcoma	50
+P20140000067	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	66
+P20140000188	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	75
+P20140001038	Female	Not Specified	Not Reported	Self reported	colon carcinoma	45
+P20140001159	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	71
+P20150001652	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	70
+P20160001835	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	53
+P20150001777	Male	Not Specified	Not Hispanic or Latino	Self reported	colon adenocarcinoma	37
+P20150001778	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	36
+P20140000084	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	40
+P20140001051	Female	Not Specified	Not Reported	Self reported	colon carcinoma	44
+P20140001054	Female	Not Specified	Not Reported	Self reported	colon carcinoma	58
+P20150001651	Female	Not Specified	Not Reported	Self reported	colon carcinoma	35
+P20140001055	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	53
+P20140001297	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	62
+P20140000080	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	56
+P20150001649	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	72
+P20160001804	Female	Not Specified	Not Reported	Self reported	colon adenocarcinoma	62
+P20160001809	Male	Not Specified	Not Reported	Self reported	synovial sarcoma	21
+P20160001808	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	79
+P20140000078	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	54
+P20140001048	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20160001803	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	74
+P20160001802	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	53
+P20150001645	Male	Not Specified	Not Hispanic or Latino	Self reported	bladder urothelial papillary carcinoma	76
+P20160001801	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	68
+P20180002019	Female	Not Specified	Other	Self reported	lung small cell carcinoma	50
+P20140001061	Female	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	56
+P20140001060	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	56
+P20140000096	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	52
+P20140000097	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	60
+P20150001640	Male	Not Specified	Not Reported	Self reported	neuroendocrine tumor	67
+P20140000098	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	64
+P20140000099	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	44
+P20140000090	Female	Not Specified	Not Hispanic or Latino	Self reported	breast metaplastic carcinoma	43
+P20140000091	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	45
+P20160001817	Female	Not Specified	Not Reported	Self reported	breast adenocarcinoma	56
+P20140000089	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	68
+P20140001179	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	57
+P20140001299	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	52
+P20140001059	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	71
+P20160001814	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	86
+P20150001636	Male	Not Specified	Not Reported	Self reported	lung cancer	63
+P20150001634	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	55
+P20140000260	Female	Not Specified	Not Hispanic or Latino	Self reported	chondrosarcoma	68
+P20140001230	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	81
+P20140001593	Male	Not Specified	Not Reported	Self reported	rectum adenocarcinoma	59
+P20140000020	Female	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	82
+P20140000262	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	65
+P20140001471	Female	Not Specified	Not Hispanic or Latino	Self reported	epithelioid sarcoma	22
+P20210002064	Female	Not Specified	Not Hispanic or Latino	Self reported	rhabdomyosarcoma	5
+P20140001353	Male	Not Specified	Not Reported	Self reported	pancreatic carcinoma	55
+P20140000022	Female	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	70
+P20140000013	Unspecified	Not Specified	Not Reported	Self reported	urinary bladder urothelial carcinoma	
+P20140000134	Female	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	82
+P20140001343	Female	Not Specified	Not Reported	Self reported	squamous cell carcinoma	90
+P20160001864	Female	Not Specified	Not Reported	Self reported	squamous cell carcinoma	79
+P20140000135	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	67
+P20160001863	Male	Not Specified	Not Reported	Self reported	myelodysplastic syndrome	61
+P20140000015	Male	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	58
+P20140000136	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	68
+P20140000257	Male	Not Specified	Hispanic	Self reported	lung squamous cell carcinoma	74
+P20160001862	Male	Not Specified	Not Reported	Self reported	B-cell lymphoma	77
+P20140000016	Female	Not Specified	Not Hispanic or Latino	Self reported	transitional cell carcinoma	77
+P20140000137	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	84
+P20140001226	Female	Not Specified	Not Reported	Self reported	renal cell carcinoma	80
+P20140000139	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	70
+P20210002059	Female	Not Specified	Not Hispanic or Latino	Self reported	alveolar rhabdomyosarcoma	20
+P20140001360	Female	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	67
+P20140000271	Male	Not Specified	Not Hispanic or Latino	Self reported	leiomyosarcoma	70
+P20140001362	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	52
+P20160001883	Female	Not Specified	Not Reported	Self reported	breast carcinoma	54
+P20140001482	Female	Not Specified	Not Reported	Self reported	colon adenocarcinoma	51
+P20160001882	Female	Not Specified	Not Reported	Self reported	breast lobular carcinoma	61
+P20140000274	Male	Not Specified	Not Hispanic or Latino	Self reported	melanoma	78
+P20140001485	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	83
+P20160001881	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	42
+P20140000023	Female	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	60
+P20140001355	Unspecified	Not Specified	Not Reported	Self reported	colon adenocarcinoma	
+P20160001876	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	32
+P20140000024	Male	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	71
+P20140000025	Female	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	55
+P20140000026	Female	Not Specified	Not Hispanic or Latino	Self reported	Carcinoma: Urothelial carcinoma	78
+P20140000268	Female	Not Specified	Not Reported	Self reported	leiomyosarcoma	52
+P20140001477	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	71
+P20140001117	Male	Not Specified	Not Reported	Self reported	sarcoma	46
+P20160001879	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	33
+P20160001878	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	33
+P20140001118	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	62
+P20160001877	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	36
+P20150001690	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	64
+P20140000282	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	59
+P20150001694	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	55
+P20160001850	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	71
+P20140000163	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	60
+P20140001251	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	78
+P20140000164	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	78
+P20140001375	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	76
+P20140001495	Female	Not Specified	Not Reported	Self reported	invasive lobular carcinoma	77
+P20150001693	Male	Not Specified	Not Reported	Self reported	urinary bladder cancer	67
+P20170001927	Male	Not Specified	Hispanic	Self reported	T2 Transitional Cell Carcinoma	46
+P20140001245	Male	Not Specified	Not Reported	Self reported	melanoma	47
+P20140001366	Male	Not Specified	Hispanic	Self reported	osteosarcoma	23
+P20140001244	Male	Not Specified	Not Reported	Self reported	melanoma	47
+P20170001923	Male	Not Specified	Not Hispanic or Latino	Self reported	melanoma	79
+P20140001368	Female	Not Specified	Not Hispanic or Latino	Self reported	sarcoma	54
+P20150001685	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	56
+P20140000037	Male	Not Specified	Not Hispanic or Latino	Self reported	Urothelial carcinoma	70
+P20140001246	Male	Not Specified	Not Reported	Self reported	melanoma	72
+P20140001249	Male	Not Specified	Not Reported	Self reported	lung adenocarcinoma	50
+P20140000039	Male	Not Specified	Not Reported	Self reported	osteosarcoma	11
+P20140000292	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	53
+P20140000051	Female	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	61
+P20160001861	Female	Not Specified	Hispanic	Self reported	T-cell adult acute lymphocytic leukemia	35
+P20140000053	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	59
+P20160001860	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	48
+P20150001684	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	61
+P20140000175	Male	Not Specified	Not Hispanic or Latino	Self reported	pancreatic carcinoma	77
+P20150001681	Male	Not Specified	Not Reported	Self reported	urinary bladder cancer	72
+P20140001264	Male	Not Specified	Not Reported	Self reported	gastrointestinal stromal tumor	65
+P20150001682	Male	Not Specified	Not Reported	Self reported	lung adenocarcinoma	50
+P20160001859	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	59
+P20170001915	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	67
+P20170001916	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	74
+P20160001854	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	61
+P20140000288	Male	Not Specified	Hispanic	Self reported	adenocarcinoma	71
+P20160001853	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	75
+P20140000047	Male	Not Specified	Not Reported	Self reported	brain glioblastoma multiforme	67
+P20150001674	Female	Not Specified	Not Reported	Self reported	renal cell carcinoma	66
+P20210002065	Female	Not Specified	Not Hispanic or Latino	Self reported	Luminal Breast Carcinoma	71
+P20140000169	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	30
+P20140001136	Female	Not Specified	Not Hispanic or Latino	Self reported	leiomyosarcoma	52
+P20160001858	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	67
+P20160001857	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	58
+P20140001259	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	55
+P20160001856	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	69
+P20150001679	Male	Not Specified	Not Reported	Self reported	kidney rhabdoid cancer	1
+P20160001855	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	44
+P20170001950	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	68
+P20170001948	Male	Not Specified	Not Reported	Self reported	acute lymphocytic leukemia	25
+P20170001949	Female	Not Specified	Not Reported	Self reported	acute monocytic leukemia	69
+P20170001941	Male	Not Specified	Not Reported	Self reported	pediatric ependymoma	3
+P20170001942	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	64
+P20170001943	Male	Not Specified	Not Reported	Self reported	Ewing sarcoma	24
+P20140000909	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	32
+P20140000905	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000906	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20170001933	Male	Not Specified	Not Reported	Self reported	urinary bladder cancer	68
+P20170001935	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	29
+P20170001936	Male	Not Specified	Not Hispanic or Latino	Self reported	non-small cell lung carcinoma	67
+P20160001796	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	66
+P20160001894	Female	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	35
+P20160001893	Male	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	20
+P20160001892	Female	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	37
+P20160001891	Male	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	66
+P20140000914	Female	Not Specified	Not Reported	Self reported	sarcoma	77
+P20140000915	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	44
+P20140000916	Male	Not Specified	Not Reported	Self reported	neuroblastoma	4
+P20160001887	Female	Not Specified	Not Reported	Self reported	acute lymphocytic leukemia	20
+P20160001886	Female	Not Specified	Not Reported	Self reported	breast adenocarcinoma	51
+P20160001885	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	40
+P20160001884	Female	Not Specified	Hispanic	Self reported	invasive ductal carcinoma	45
+P20170001962	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	76
+P20160001889	Male	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	56
+P20160001888	Male	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	47
+P20170001960	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	78
+P20140000804	Female	Not Specified	Not Reported	Self reported	cancer	58
+P20140000925	Male	Not Specified	Hispanic	Self reported	pancreatic adenocarcinoma	76
+P20170001959	Male	Not Specified	Not Reported	Self reported	chronic myeloid leukemia	69
+P20140000927	Male	Not Specified	Hispanic	Self reported	pancreas adenocarcinoma	76
+P20140000929	Male	Not Specified	Not Hispanic or Latino	Self reported	colon adenocarcinoma	52
+P20170001955	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	56
+P20160001898	Male	Not Specified	Not Reported	Self reported	diffuse large B-cell lymphoma	57
+P20170001956	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	42
+P20160001897	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	44
+P20170001957	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	68
+P20160001896	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	48
+P20170001958	Male	Not Specified	Not Reported	Self reported	B-cell adult acute lymphocytic leukemia	61
+P20160001895	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	61
+P20170001952	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	68
+P20170001953	Male	Not Specified	Not Reported	Self reported	acute leukemia	54
+P20140000921	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	64
+P20170001954	Female	Not Specified	Not Reported	Self reported	acute monocytic leukemia	66
+P20160001899	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	55
+P20140001192	Male	Not Specified	Not Reported	Self reported	melanoma	60
+P20140001074	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	52
+P20200002053	Male	Not Specified	Not Hispanic or Latino	Self reported	pediatric osteosarcoma	14
+J000077451	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	75
+P20140001083	Male	Not Specified	Not Reported	Self reported	mucoepidermoid carcinoma	79
+P20140001089	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	65
+P20140001080	Female	Not Specified	Not Reported	Self reported	melanoma	54
+P20140001079	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	63
+P20140001094	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	35
+P20200002052	Female	Not Specified	Not Reported	Self reported	brain glioma	5
+P20200002051	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	62
+P20140000735	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000977	Male	Not Specified	Not Reported	Self reported	melanoma	77
+P20140000736	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000737	Female	Not Specified	Not Reported	Self reported	colon carcinoma	66
+P20140000730	Unspecified	Not Specified	Not Hispanic or Latino	Self reported	cancer	
+P20140000972	Male	Not Specified	Not Hispanic or Latino	Self reported	squamous cell carcinoma	71
+P20140000973	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	63
+P20140000732	Female	Not Specified	Not Hispanic or Latino	Self reported	renal cell carcinoma	53
+P20140000976	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	65
+P20140000988	Male	Not Specified	Not Hispanic or Latino	Self reported	mucinous adenocarcinoma	73
+P20140000983	Female	Not Specified	Not Reported	Self reported	malignant mesothelioma	72
+P20140000862	Male	Not Specified	Not Reported	Self reported	bladder urothelial papillary carcinoma	77
+P20140000863	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	70
+P20140000864	Female	Not Specified	Not Hispanic or Latino	Self reported	adenosquamous carcinoma	78
+P20140000744	Female	Not Specified	Not Reported	Self reported	colon carcinoma	
+P20140000757	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	55
+P20140000879	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	84
+P20140000639	Female	Not Specified	Not Reported	Self reported	melanoma	59
+P20140000870	Female	Not Specified	Not Reported	Self reported	renal cell carcinoma	61
+P20140000992	Female	Not Specified	Not Hispanic or Latino	Self reported	alveolar rhabdomyosarcoma	2
+P20140000631	Female	Not Specified	Not Hispanic or Latino	Self reported	large cell neuroendocrine carcinoma	73
+P20140000995	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000875	Female	Not Specified	Hispanic	Self reported	adenocarcinoma	75
+P20140000996	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140001600	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	62
+P20140000876	Female	Not Specified	Hispanic	Self reported	adenocarcinoma	75
+P20140000998	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	55
+P20140000760	Female	Not Specified	Not Hispanic or Latino	Self reported	ovary serous adenocarcinoma	68
+P20140000884	Male	Not Specified	Not Reported	Self reported	rhabdomyosarcoma	41
+P20140000766	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	66
+P20180001974	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	43
+P20140000767	Male	Not Specified	Not Hispanic or Latino	Self reported	colon adenocarcinoma	83
+P20180001975	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	67
+P20180001992	Male	Not Specified	Not Reported	Self reported	osteosarcoma	11
+P20180001990	Female	Not Specified	Not Hispanic or Latino	Self reported	endometrial cancer	58
+P20180001991	Female	Not Specified	Not Hispanic or Latino	Self reported	endometrial cancer	64
+P20190002044	Other	Not Specified	Not Reported	Self reported	rhabdomyosarcoma	22
+P20140000815	Male	Not Specified	Not Hispanic or Latino	Self reported	ampulla of Vater adenocarcinoma	76
+P20140000817	Male	Not Specified	Not Reported	Self reported	colon carcinoma	60
+P20180001986	Male	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	8
+P20190002037	Female	Not Specified	Not Reported	Self reported	adenosquamous lung carcinoma	63
+P20190002036	Male	Not Specified	Not Reported	Self reported	pancreatic ductal adenocarcinoma	85
+P20190002035	Male	Not Specified	Not Reported	Self reported	Adenocarcinoma	58
+P20190002034	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	34
+P20190002033	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	72
+P20190002031	Female	Not Specified	Not Hispanic or Latino	Self reported	luminal breast carcinoma	65
+P20140000945	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	51
+P20140000947	Female	Not Specified	Not Hispanic or Latino	Self reported	sarcoma	56
+P20140000948	Female	Not Specified	Not Reported	Self reported	colon carcinoma	87
+P20140000707	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	69
+P20140000949	Female	Not Specified	Not Reported	Self reported	colon adenocarcinoma	47
+P20140000700	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	52
+P20140000955	Male	Not Specified	Not Reported	Self reported	sarcoma	6
+P20140000835	Male	Not Specified	Not Reported	Self reported	bladder urothelial papillary carcinoma	65
+P20140000958	Female	Not Specified	Not Reported	Self reported	colon carcinoma	66
+J000078366	Female	Not Specified	Not Reported	Self reported	sarcoma	10
+P20140000710	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	63
+P20140000953	Male	Not Specified	Not Hispanic or Latino	Self reported	neuroendocrine carcinoma	79
+P20140000712	Male	Not Specified	Not Reported	Self reported	cancer	82
+P20140000726	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	73
+P20140000847	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	46
+P20140000969	Female	Not Specified	Not Reported	Self reported	squamous cell carcinoma	56
+P20140000840	Female	Not Specified	Not Reported	Self reported	pancreatic adenocarcinoma	81
+P20140000963	Male	Not Specified	Not Reported	Self reported	tonsil cancer	62
+P20140000965	Female	Not Specified	Not Hispanic or Latino	Self reported	melanoma	74
+P20140000220	Female	Not Specified	Not Hispanic or Latino	Self reported	pleomorphic carcinoma	52
+P20140000341	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	73
+P20140001308	Male	Not Specified	Not Reported	Self reported	lung adenocarcinoma	68
+P20140001429	Male	Not Specified	Not Reported	Self reported	rhabdomyosarcoma	20
+P20140001307	Male	Not Specified	Not Reported	Self reported	melanoma	66
+P20140001549	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	57
+P20140000210	Male	Not Specified	Not Hispanic or Latino	Self reported	large cell neuroendocrine carcinoma	53
+P20140000211	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	70
+P20140000332	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	79
+P20140000212	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	51
+P20140001543	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	49
+P20140000698	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	79
+P20140001425	Male	Not Specified	Not Reported	Self reported	sarcoma	64
+P20150001703	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	72
+P20140000337	Female	Not Specified	Not Reported	Self reported	appendix carcinoma	49
+P20140000217	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	59
+P20140000338	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	42
+P20140001426	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	57
+P20150001701	Male	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	6
+P20140000230	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	47
+P20140000352	Male	Not Specified	Not Hispanic or Latino	Self reported	B-cell lymphoma	68
+P20140001440	Male	Not Specified	Not Reported	Self reported	alveolar rhabdomyosarcoma	13
+P20140000342	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	63
+P20140001311	Male	Not Specified	Not Reported	Self reported	squamous cell carcinoma	69
+P20140001431	Male	Not Specified	Not Hispanic or Latino	Self reported	synovial sarcoma	24
+P20140000344	Female	Not Specified	Not Reported	Self reported	embryonal rhabdomyosarcoma	14
+P20140000103	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	73
+P20140000224	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	49
+P20140000225	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	50
+P20140001315	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	45
+P20140000226	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	58
+P20140001559	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	46
+P20140000107	Female	Not Specified	Not Hispanic or Latino	Self reported	breast carcinoma	48
+P20140000228	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	73
+P20140000360	Female	Not Specified	Not Hispanic or Latino	Self reported	sarcoma	55
+P20140001571	Male	Not Specified	Not Reported	Self reported	pediatric osteosarcoma	12
+P20140001570	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	75
+P20140000241	Male	Not Specified	Not Reported	Self reported	lung mixed small cell and squamous cell carcinoma	82
+P20140001331	Male	Not Specified	Not Reported	Self reported	lung adenocarcinoma	55
+P20140000242	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	45
+P20140001209	Female	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	86
+P20140000112	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	65
+P20140000113	Female	Not Specified	Not Hispanic or Latino	Self reported	invasive ductal carcinoma	63
+P20140001205	Female	Not Specified	Not Reported	Self reported	colon adenocarcinoma	51
+P20140000359	Female	Not Specified	Not Reported	Self reported	colon adenocarcinoma	59
+P20140000239	Female	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	62
+P20140001448	Female	Not Specified	Not Reported	Self reported	pancreatic adenocarcinoma	68
+P20140000370	Female	Not Specified	Not Reported	Self reported	invasive ductal carcinoma	86
+P20140000250	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	69
+P20140000371	Male	Not Specified	Not Hispanic or Latino	Self reported	renal cell carcinoma	9
+P20140000372	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	66
+P20140001100	Female	Not Specified	Not Hispanic or Latino	Self reported	lung small cell carcinoma	60
+P20140000253	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	74
+P20140001583	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	60
+P20140000365	Female	Not Specified	Not Reported	Self reported	spindle cell sarcoma	62
+J000094100	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	60
+P20140000248	Male	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	66
+P20140000369	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	66
+P20140001578	Female	Not Specified	Not Hispanic or Latino	Self reported	lung small cell carcinoma	58
+P20140000780	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	76
+P20140000658	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	42
+P20160001904	Male	Not Specified	Not Reported	Self reported	acute leukemia	51
+P20160001903	Male	Not Specified	Not Reported	Self reported	mature T-cell and NK-cell lymphoma	52
+P20150001749	Male	Not Specified	Not Hispanic or Latino	Self reported	urinary bladder cancer	75
+P20140000771	Unspecified	Not Specified	Not Reported	Self reported	colon adenocarcinoma	
+P20140000772	Female	Not Specified	Not Reported	Self reported	ovary papillary carcinoma	
+P20140000773	Female	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000894	Female	Not Specified	Not Reported	Self reported	squamous cell carcinoma	72
+P20140000774	Male	Not Specified	Not Reported	Self reported	adenocarcinoma	
+P20140000775	Female	Not Specified	Hispanic	Self reported	adenocarcinoma	78
+P20160001902	Female	Not Specified		Self reported	adult T-cell leukemia	46
+P20160001901	Male	Not Specified	Not Reported	Self reported	mantle cell lymphoma	63
+P20160001900	Male	Not Specified	Not Reported	Self reported	acute myeloid leukemia	63
+P20150001623	Male	Not Specified	Not Hispanic or Latino	Self reported	pancreas adenocarcinoma	64
+P20150001745	Female	Not Specified	Not Reported	Self reported	invasvie ductal carcinoma	39
+P20140000307	Male	Not Specified	Not Reported	Self reported	pancreatic ductal adenocarcinoma	61
+P20150001616	Male	Not Specified	Not Hispanic or Latino	Self reported	mucinous adenocarcinoma	69
+P20140000784	Male	Not Specified	Not Reported	Self reported	melanoma	60
+P20140000301	Male	Not Specified	Not Hispanic or Latino	Self reported	adenocarcinoma	58
+P20140000302	Male	Not Specified	Not Hispanic or Latino	Self reported	pancreatic ductal adenocarcinoma	60
+P20140000786	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	
+P20140001513	Female	Not Specified	Not Hispanic or Latino	Self reported	neuroblastoma	5
+P20150001614	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	79
+P20140000304	Female	Not Specified	Not Hispanic or Latino	Self reported	pancreatic ductal adenocarcinoma	77
+J000096837	Female	Not Specified	Not Reported	Self reported	acute myeloid leukemia	40
+P20140000318	Female	Not Specified	Not Hispanic or Latino	Self reported	papillary serous adenocarcinoma	54
+P20140001409	Male	Not Specified	Not Hispanic or Latino	Self reported	melanoma	50
+P20140001408	Male	Not Specified	Not Reported	Self reported	colon adenocarcinoma	58
+P20140000313	Female	Not Specified	Not Reported	Self reported	papillary serous adenocarcinoma	65
+P20140000798	Female	Not Specified	Not Reported	Self reported	squamous cell carcinoma	57
+P20150001604	Male	Not Specified	Not Reported	Self reported	lung squamous cell carcinoma	52
+P20140000316	Female	Not Specified	Not Reported	Self reported	ovary serous adenocarcinoma	50
+P20140000320	Female	Not Specified	Not Hispanic or Latino	Self reported	ovarian serous carcinoma	56
+P20140000684	Female	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	53
+P20140000201	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	69
+P20140000322	Female	Not Specified	Not Hispanic or Latino	Self reported	carcinosarcoma	52
+P20140001533	Male	Not Specified	Not Reported	Self reported	melanoma	68
+P20140000202	Female	Not Specified	Not Reported	Self reported	lung adenocarcinoma	63
+P20140000323	Female	Not Specified	Not Reported	Self reported	papillary serous adenocarcinoma	89
+P20140001414	Male	Not Specified	Not Reported	Self reported	sarcoma	35
+P20140000204	Female	Not Specified	Not Hispanic or Latino	Self reported	lung adenocarcinoma	57
+P20140001416	Male	Not Specified	Not Reported	Self reported	sarcoma	35
+P20150001711	Female	Not Specified	Not Hispanic or Latino	Self reported	osteosarcoma	18
+P20140000206	Male	Not Specified	Not Hispanic or Latino	Self reported	lung squamous cell carcinoma	65
+P20140000327	Female	Not Specified	Not Reported	Self reported	melanoma	
+P20140001415	Male	Not Specified	Not Reported	Self reported	sarcoma	35
+P20150001712	Male	Not Specified	Not Reported	Self reported	rhabdoid cancer	1
